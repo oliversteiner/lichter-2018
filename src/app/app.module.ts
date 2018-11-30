@@ -14,7 +14,7 @@ import {
 } from 'ngx-mqtt';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-    clientId: 'lichter-2018',
+    clientId: 'lichter-2018-b',
     connectTimeout: 5000,
     hostname: '10.0.1.11',
     port: 8083,

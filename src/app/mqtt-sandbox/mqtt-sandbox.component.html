@@ -1,16 +1,52 @@
 <div>
-  <label>Topic:
-  <input  [(ngModel)]="message" placeholder="message">
-  </label>
+    <label>Topic:
+        <input [(ngModel)]="message" placeholder="message">
+    </label>
 </div>
 
 <button (click)="powerOn()">On</button>
 <button (click)="powerOff()">Off</button>
+<button (click)="getPowerStatue()">Power</button>
+<button (click)="getSensorData()">Sensor</button>
 <button (click)="getStatus()">Status</button>
+<button (click)="test()">Test</button>
+
+<code>
+<div>
+    <label>Status:
+        <input [(ngModel)]="status" placeholder="status">
+    </label>
+</div>
+
+<div>
+    <label>status:
+        <span>{{status}}</span>
+    </label>
+</div>
+<div>
+    <label>sensor:
+
+        <span>{{sensor}}</span>
+    </label>
+</div>
+<div>
+    <label>power:
+
+        <span>{{power}}</span>
+    </label>
+</div>
 
 
 <div>
-    <label>Status:
-        <input  [(ngModel)]="status2" placeholder="status">
+    <label>result:
+        <span>{{result}}</span>
     </label>
 </div>
+
+
+<div>
+    <label>test:
+        <span>{{testresult}}</span>
+    </label>
+</div>
+</code>

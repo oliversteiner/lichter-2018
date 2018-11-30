@@ -10,31 +10,79 @@ import {IMqttMessage, MqttService} from 'ngx-mqtt';
 
 
 export class MqttSandboxComponent implements OnInit, OnDestroy {
-    private subscription: Subscription;
-    private subStatus: Subscription;
+    private subscription_world: Subscription;
+    private subscription_power: Subscription;
+    private subscription_sensor: Subscription;
+    private subscription_status: Subscription;
+    private subscription_test: Subscription;
+    private subscription_result: Subscription;
     public message: string;
-    public status2: string;
+    public power: string;
+    public sensor: string;
+    public status: string;
+    public testresult: string;
+    public test_topic: string;
+    private test_message: any;
+    private result: any;
 
 
     constructor(private _mqttService: MqttService) {
-/*
-        this.subscription = this._mqttService.observe('/World').subscribe((message: IMqttMessage) => {
+
+      //  this.test_topic = 'sonoff/Timers';
+        //  this.test_topic = 'sonoff/SENSOR';
+          this.test_topic = '';
+        this.test_message = '';
+
+        this.subscription_world = this._mqttService.observe('/World').subscribe((message: IMqttMessage) => {
+            console.log('message', message.payload);
             this.message = message.payload.toString();
-            console.log('message', this.message);
 
         });
-*/
 
-        this.subStatus = this._mqttService.observe('stat/sonoff/POWER').subscribe((message: IMqttMessage) => {
-            this.status2 = message.payload.toString();
-            console.log('status2', this.status2);
+
+        this.subscription_power = this._mqttService.observe('stat/sonoff/POWER').subscribe((message: IMqttMessage) => {
+            console.log('power', message.payload);
+            this.power = message.payload.toString();
+
+        });
+
+        this.subscription_sensor = this._mqttService.observe('tele/sonoff/SENSOR').subscribe((message: IMqttMessage) => {
+            console.log('sensor', message.payload);
+
+            this.sensor = message.payload.toString();
+            console.log('sensor', this.sensor);
+
+
+        });
+
+        this.subscription_status = this._mqttService.observe('tele/sonoff/STATE').subscribe((message: IMqttMessage) => {
+            console.log('status', message.payload);
+
+            this.status = message.payload.toString();
+            console.log('status', this.status);
+
+
+        });
+
+        this.subscription_result = this._mqttService.observe('tele/sonoff/RESULT').subscribe((message: IMqttMessage) => {
+            console.log('result', message.payload);
+
+            this.result = message.payload.toString();
+            console.log('result', this.result);
+
+
+        });
+
+        this.subscription_test = this._mqttService.observe(this.test_topic).subscribe((message: IMqttMessage) => {
+            console.log('test', message.payload);
+
+            this.testresult = message.payload.toString();
+            console.log('test', this.testresult);
+
 
         });
     }
 
-    public unsafePublish(topic: string, message: string): void {
-        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
-    }
 
     public powerOn(): void {
         const topic = 'cmnd/sonoff/power';
@@ -52,15 +100,59 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
     }
 
-    public getStatus(): void {
+    public getPowerStatue(): void {
         const topic = 'cmnd/sonoff/power';
         const message = '';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 
     }
 
+    public getStatus(): void {
+        const topic = 'cmnd/sonoff/status';
+        const message = '8';
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+
+    }
+
+
+    public getSensorData(): void {
+        const topic = 'cmnd/sonoff/TelePeriod';
+        let message = '10';
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+
+        setTimeout(() => {
+                message = '60';
+                this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+            },
+            1000
+        );
+    }
+
+
+    /**
+     * TEST
+     *
+     */
+    public test(): void {
+        const topic = this.test_topic;
+        const message = this.test_message;
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+
+    }
+
+
     public ngOnDestroy() {
-        this.subscription.unsubscribe();
+
+        const topic = 'cmnd/sonoff/TelePeriod';
+        const message = '1';
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+
+
+        this.subscription_world.unsubscribe();
+        this.subscription_power.unsubscribe();
+        this.subscription_sensor.unsubscribe();
+
+
     }
 
     public ngOnInit(): void {
