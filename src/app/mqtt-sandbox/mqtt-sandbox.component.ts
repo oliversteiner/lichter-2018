@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
-import {FormsModule} from '@angular/forms';
 
 @Component({
     selector: 'app-mqtt-sandbox',
