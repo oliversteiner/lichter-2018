@@ -1,5 +1,10 @@
 # Lichter2
 
+Simple Webapp for Controll the Chrismas Lights from the Schlossgärtnerei
+
+Send MQTT Topics via Websockets to EMQX Broker to Sonoff Devices.
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
 
 ## Development server
