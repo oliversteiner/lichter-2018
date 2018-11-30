@@ -14,9 +14,8 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
     public message: string;
 
 
-
     constructor(private _mqttService: MqttService) {
-        this.subscription = this._mqttService.observe('my/topic').subscribe((message: IMqttMessage) => {
+        this.subscription = this._mqttService.observe('/World').subscribe((message: IMqttMessage) => {
             this.message = message.payload.toString();
         });
     }
@@ -24,6 +23,22 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
     public unsafePublish(topic: string, message: string): void {
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
     }
+
+    public powerOn(): void {
+        const topic = 'cmnd/sonoff/power';
+        const message = 'ON';
+
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+
+    }
+
+    public powerOff(): void {
+        const topic = 'cmnd/sonoff/power';
+        const message = 'Off';
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+
+    }
+
 
     public ngOnDestroy() {
         this.subscription.unsubscribe();

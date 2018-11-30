@@ -5,7 +5,6 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {SandboxComponent} from './sandbox/sandbox.component';
 import {MqttSandboxComponent} from './mqtt-sandbox/mqtt-sandbox.component';
-import {Observable} from 'rxjs';
 import {FormsModule} from '@angular/forms';
 
 import {
@@ -35,7 +34,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
+        MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
 
 
     ],

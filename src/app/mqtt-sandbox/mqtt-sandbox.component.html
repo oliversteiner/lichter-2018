@@ -1,9 +1,8 @@
-<p>
-  mqtt-sandbox works!
-</p>
-
 <div>
   <label>Topic:
-  <input  [(ngModel)]="subscription" placeholder="topic">
+  <input  [(ngModel)]="message" placeholder="message">
   </label>
 </div>
+
+<button (click)="powerOn()">On</button>
+<button (click)="powerOff()">Off</button>
