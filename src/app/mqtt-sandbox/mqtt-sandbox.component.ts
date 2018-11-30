@@ -11,12 +11,24 @@ import {IMqttMessage, MqttService} from 'ngx-mqtt';
 
 export class MqttSandboxComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
+    private subStatus: Subscription;
     public message: string;
+    public status2: string;
 
 
     constructor(private _mqttService: MqttService) {
+/*
         this.subscription = this._mqttService.observe('/World').subscribe((message: IMqttMessage) => {
             this.message = message.payload.toString();
+            console.log('message', this.message);
+
+        });
+*/
+
+        this.subStatus = this._mqttService.observe('stat/sonoff/POWER').subscribe((message: IMqttMessage) => {
+            this.status2 = message.payload.toString();
+            console.log('status2', this.status2);
+
         });
     }
 
@@ -29,6 +41,7 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
         const message = 'ON';
 
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 
     }
 
@@ -39,6 +52,12 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
     }
 
+    public getStatus(): void {
+        const topic = 'cmnd/sonoff/power';
+        const message = '';
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+
+    }
 
     public ngOnDestroy() {
         this.subscription.unsubscribe();
