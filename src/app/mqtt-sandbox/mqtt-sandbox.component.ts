@@ -28,9 +28,9 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
     constructor(private _mqttService: MqttService) {
 
-      //  this.test_topic = 'sonoff/Timers';
+        //  this.test_topic = 'sonoff/Timers';
         //  this.test_topic = 'sonoff/SENSOR';
-          this.test_topic = '';
+        this.test_topic = '';
         this.test_message = '';
 
         this.subscription_world = this._mqttService.observe('/World').subscribe((message: IMqttMessage) => {
@@ -73,14 +73,16 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
         });
 
-        this.subscription_test = this._mqttService.observe(this.test_topic).subscribe((message: IMqttMessage) => {
-            console.log('test', message.payload);
+        if (this.test_topic !== '') {
+            this.subscription_test = this._mqttService.observe(this.test_topic).subscribe((message: IMqttMessage) => {
+                console.log('test', message.payload);
 
-            this.testresult = message.payload.toString();
-            console.log('test', this.testresult);
+                this.testresult = message.payload.toString();
+                console.log('test', this.testresult);
 
 
-        });
+            });
+        }
     }
 
 
@@ -95,7 +97,7 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
     public powerOff(): void {
         const topic = 'cmnd/sonoff/power';
-        const message = 'Off';
+        const message = 'OFF';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 
     }
@@ -151,6 +153,9 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
         this.subscription_world.unsubscribe();
         this.subscription_power.unsubscribe();
         this.subscription_sensor.unsubscribe();
+        this.subscription_status.unsubscribe();
+        this.subscription_test.unsubscribe();
+        this.subscription_result.unsubscribe();
 
 
     }
