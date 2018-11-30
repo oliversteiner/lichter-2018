@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
+import { MqttSandboxComponent } from './mqtt-sandbox/mqtt-sandbox.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SandboxComponent
+    SandboxComponent,
+    MqttSandboxComponent
   ],
   imports: [
     BrowserModule,
