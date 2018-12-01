@@ -1,11 +1,38 @@
 <h1>{{title}}</h1>
 
 
-<ul>
-    <li *ngFor="let device of devices">
-        <span (click)="toggleTimer(device)"> {{device.timer}}</span>
-        <span (click)="togglePower(device)"> {{device.power}}</span>
-        <span> {{device.name}}</span>
-        <span> {{device.sensor}}</span>
+<ul class="devices-list">
+    <li class="devices-list-item" *ngFor="let device of devices">
+
+        <!-- timer -->
+        <span class="item-timer"
+
+              [class.on]="device.timer === true"
+              [class.off]="device.timer === false"
+
+              (click)="toggleTimer(device)">
+
+            {{device.timer}}
+        </span>
+
+        <!-- power -->
+        <span class="item-power"
+
+              [class.on]="device.power === true"
+              [class.off]="device.power === false"
+
+              (click)="togglePower(device)">
+            {{device.power}}
+        </span>
+
+        <!-- name -->
+        <span class="item-name">
+            {{device.name}}
+        </span>
+
+        <!-- sensor -->
+        <span *ngIf="device.sensor" class="item-sensor">
+            sensor
+        </span>
     </li>
 </ul>

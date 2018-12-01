@@ -30,10 +30,10 @@ export class LichtComponent implements OnInit {
     }
 
     togglePower(device: Device): void {
-        if (device.timer === true) {
-            device.timer = false;
+        if (device.power === true) {
+            device.power = false;
         } else {
-            device.timer = true;
+            device.power = true;
         }
     }
 }

@@ -1,0 +1,58 @@
+.on {
+  background-color: #00e046;
+}
+
+.error {
+  background-color: #e0595f;
+}
+
+.off {
+  background-color: #ded7d9;
+
+}
+
+.devices-list {
+  margin: 0;
+  padding: 0;
+}
+
+.devices-list-item {
+  list-style: none;
+  padding: 10px;
+  border-bottom: 1px solid silver;
+}
+
+
+.item-timer,
+.item-power,
+.item-name,
+.item-sensor {
+  padding: 2px;
+  margin: 0 5px;
+  min-width: 40px;
+  display: inline-block;
+  text-align: center;
+}
+
+
+.item-timer {
+  padding: 2px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.item-power {
+  cursor: pointer;
+
+}
+
+.item-name {
+  min-width: 200px;
+  text-align: left;
+  border: none;
+}
+
+.item-sensor {
+  cursor: pointer;
+
+}
