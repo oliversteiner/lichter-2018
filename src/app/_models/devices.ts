@@ -1,23 +1,60 @@
+
+
 export interface Device {
     name: string;
-    timer: string;
-    status: string;
-    sensor: string;
-
+    timer: boolean;
+    power: boolean;
+    online: boolean;
+    sensor: boolean;
+    temperature?: number;
+    humidity?: number;
+    mqtt_group?: string;
+    mqtt_name?: string;
 }
 
 export class Device {
+
+
+
     constructor(
         public name: string,
-        public timer: string,
-        public status: string,
-        public sensor: string,
+        public timer: boolean,
+        public power: boolean,
+        public online: boolean,
+        public sensor: boolean,
+        public temperature?: number,
+        public humidity?: number,
     ) {
-        this.name = 'name';
-        this.timer = 'timer';
-        this.status = 'status';
-        this.sensor = 'sensor';
+        this.name = 'Device Name';
+        this.timer = false;
+        this.power = false;
+        this.online = false;
+        this.sensor = false;
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

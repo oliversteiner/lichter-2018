@@ -1,17 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Device} from '../_models/devices';
+import {DEVICES} from '../../assets/data/devices';
+
 
 @Component({
-  selector: 'app-licht',
-  templateUrl: './licht.component.html',
-  styleUrls: ['./licht.component.scss']
+    selector: 'app-licht',
+    templateUrl: './licht.component.html',
+    styleUrls: ['./licht.component.scss']
 })
+
 export class LichtComponent implements OnInit {
 
-  title = 'Lichtstatus';
+    title = 'Lichtstatus';
 
-  constructor() { }
+    devices: Device[] = DEVICES;
 
-  ngOnInit() {
-  }
+    constructor() {
+    }
 
+    ngOnInit() {
+    }
+
+    toggleTimer(device: Device): void {
+        if (device.timer === true) {
+            device.timer = false;
+        } else {
+            device.timer = true;
+        }
+    }
+
+    togglePower(device: Device): void {
+        if (device.timer === true) {
+            device.timer = false;
+        } else {
+            device.timer = true;
+        }
+    }
 }
