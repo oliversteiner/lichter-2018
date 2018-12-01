@@ -15,6 +15,9 @@ import {
 import { LichtComponent } from './licht/licht.component';
 import { TimerComponent } from './timer/timer.component';
 import { SensorenComponent } from './sensoren/sensoren.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     clientId: 'lichter-2018-b',
@@ -35,6 +38,9 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         LichtComponent,
         TimerComponent,
         SensorenComponent,
+        FooterComponent,
+        HeaderComponent,
+        NavigationComponent,
     ],
     imports: [
         BrowserModule,
