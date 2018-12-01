@@ -12,6 +12,9 @@ import {
     MqttModule,
     IMqttServiceOptions
 } from 'ngx-mqtt';
+import { LichtComponent } from './licht/licht.component';
+import { TimerComponent } from './timer/timer.component';
+import { SensorenComponent } from './sensoren/sensoren.component';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     clientId: 'lichter-2018-b',
@@ -29,6 +32,9 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         AppComponent,
         SandboxComponent,
         MqttSandboxComponent,
+        LichtComponent,
+        TimerComponent,
+        SensorenComponent,
     ],
     imports: [
         BrowserModule,
