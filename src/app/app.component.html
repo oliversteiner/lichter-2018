@@ -1,23 +1,19 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+<div>
+    <h1>
+        {{ title }}
+    </h1>
 </div>
-<ul>
-  <li>
-    <a routerLink="/">Home</a>
-  </li>
-  <li>
-    <a routerLink="/sandbox">Sandbox</a>
-  </li>
-  <li>
-    <a routerLink="/mqtt-sandbox">MQTT Sandbox</a>
-  </li>
 
+<!-- nav -->
+<ul>
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/licht">Licht</a></li>
+    <li><a routerLink="/timer">Timer</a></li>
+    <li><a routerLink="/sensoren">Sensoren</a></li>
+    <li><a routerLink="/sandbox">Sandbox</a></li>
+    <li><a routerLink="/mqtt-sandbox">MQTT Sandbox</a></li>
 </ul>
 
+
+<!-- Views -->
 <router-outlet></router-outlet>
-
-
-<app-mqtt-sandbox></app-mqtt-sandbox>
