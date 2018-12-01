@@ -30,8 +30,8 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
         //  this.test_topic = 'sonoff/Timers';
         //  this.test_topic = 'sonoff/SENSOR';
-        this.test_topic = '';
-        this.test_message = '';
+        this.test_topic = 'cmnd/sonoff/Timer1';
+        this.test_message = '{"Arm":1,"Time":"01:57","Window":0,"Days":"SM00TFS","Repeat":1,"Output":1,"Action":1}';
 
         this.subscription_world = this._mqttService.observe('/World').subscribe((message: IMqttMessage) => {
             console.log('message', message.payload);
@@ -130,6 +130,12 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
         );
     }
 
+    public setTimezone(): void {
+        const topic = 'cmnd/sonoff/Timezone';
+        const message = '1';
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+
+    }
 
     /**
      * TEST
@@ -141,6 +147,8 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 
     }
+
+
 
 
     public ngOnDestroy() {
