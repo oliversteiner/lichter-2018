@@ -56,3 +56,24 @@
   cursor: pointer;
 
 }
+
+.container-sensor {
+  padding: 2px;
+  display: none;
+}
+
+.container-sensor.is-active{
+  display: block;
+}
+
+.container-sensor.is-inactive{
+  display: none;
+}
+
+
+.item-humidity,
+.item-temperature {
+  display: inline-block;
+  padding: 10px;
+  margin: 10px;
+}

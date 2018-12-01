@@ -1,38 +1,65 @@
 <h1>{{title}}</h1>
 
 
+<h2 (click)="toggleAllDevices()">All Lights ({{allDevicesStatus}})</h2>
+
 <ul class="devices-list">
     <li class="devices-list-item" *ngFor="let device of devices">
+        <div class="item-container">
+            <!-- timer -->
+            <span class="item-timer"
 
-        <!-- timer -->
-        <span class="item-timer"
+                  [class.on]="device.timer === true"
+                  [class.off]="device.timer === false"
 
-              [class.on]="device.timer === true"
-              [class.off]="device.timer === false"
-
-              (click)="toggleTimer(device)">
+                  (click)="toggleTimer(device)">
 
             {{device.timer}}
         </span>
 
-        <!-- power -->
-        <span class="item-power"
+            <!-- power -->
+            <span class="item-power"
 
-              [class.on]="device.power === true"
-              [class.off]="device.power === false"
+                  [class.on]="device.power === true"
+                  [class.off]="device.power === false"
 
-              (click)="togglePower(device)">
+                  (click)="togglePower(device)">
             {{device.power}}
         </span>
 
-        <!-- name -->
-        <span class="item-name">
+            <!-- name -->
+            <span class="item-name">
             {{device.name}}
         </span>
 
-        <!-- sensor -->
-        <span *ngIf="device.sensor" class="item-sensor">
+            <!-- sensor -->
+            <span *ngIf="device.sensor" class="item-sensor"
+
+                  (click)="toggleDetails(device)">
             sensor
         </span>
+        </div>
+
+
+        <!-- sensors -->
+        <div *ngIf="device.sensor" class="container-sensor"
+
+            [ngClass]="{
+            'is-active': device.showSensor,
+            'is-inactive': !device.showSensor
+            }"
+
+        >
+            <!-- temperature-->
+            <div class="item-temperature">
+                {{device.temperature}}
+            </div>
+
+            <!-- humidity -->
+            <div class="item-humidity">
+                {{device.humidity}}
+            </div>
+
+        </div>
     </li>
 </ul>

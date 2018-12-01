@@ -1,6 +1,7 @@
 
 
 export interface Device {
+    showSensor: boolean;
     name: string;
     timer: boolean;
     power: boolean;
