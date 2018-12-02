@@ -1,7 +1,6 @@
 
 
 export interface Device {
-    showSensor: boolean;
     name: string;
     timer: boolean;
     power: boolean;
@@ -11,6 +10,9 @@ export interface Device {
     humidity?: number;
     mqtt_group?: string;
     mqtt_name?: string;
+
+    // helper
+    sensorDetails?: boolean;
 }
 
 export class Device {

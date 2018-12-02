@@ -12,12 +12,13 @@ import {
     MqttModule,
     IMqttServiceOptions
 } from 'ngx-mqtt';
-import { LichtComponent } from './licht/licht.component';
-import { TimerComponent } from './timer/timer.component';
-import { SensorenComponent } from './sensoren/sensoren.component';
-import { FooterComponent } from './footer/footer.component';
-import { HeaderComponent } from './header/header.component';
-import { NavigationComponent } from './navigation/navigation.component';
+import {LichtComponent} from './licht/licht.component';
+import {TimerComponent} from './timer/timer.component';
+import {SensorenComponent} from './sensoren/sensoren.component';
+import {FooterComponent} from './footer/footer.component';
+import {HeaderComponent} from './header/header.component';
+import {NavigationComponent} from './navigation/navigation.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     clientId: 'lichter-2018-b',
@@ -41,18 +42,18 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         FooterComponent,
         HeaderComponent,
         NavigationComponent,
+
     ],
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         FormsModule,
         MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
 
 
     ],
-    providers: [
-
-    ],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule {

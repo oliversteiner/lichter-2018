@@ -1,12 +1,32 @@
 import {Component, OnInit} from '@angular/core';
 import {Device} from '../_models/devices';
 import {DEVICES} from '../../assets/data/devices';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 
 @Component({
     selector: 'app-licht',
     templateUrl: './licht.component.html',
-    styleUrls: ['./licht.component.scss']
+    styleUrls: ['./licht.component.scss'],
+    animations: [
+        trigger('openClose', [
+            // ...
+            state('open', style({
+                height: '50px',
+                opacity: 1,
+            })),
+            state('closed', style({
+                height: '0px',
+                opacity: 0,
+            })),
+            transition('open => closed', [
+                animate('0.2s')
+            ]),
+            transition('closed => open', [
+                animate('0.2s')
+            ]),
+        ]),
+    ],
 })
 
 export class LichtComponent implements OnInit {
@@ -17,6 +37,12 @@ export class LichtComponent implements OnInit {
     devices: Device[] = DEVICES;
 
     constructor() {
+
+        // set Status of sensorDetails to 'closed'
+        for (const device of this.devices) {
+            device.sensorDetails = false;
+
+        }
     }
 
     ngOnInit() {
@@ -60,6 +86,6 @@ export class LichtComponent implements OnInit {
     }
 
     toggleDetails(device: Device) {
-        device.showSensor = device.showSensor !== true;
+        device.sensorDetails = device.sensorDetails !== true;
     }
 }

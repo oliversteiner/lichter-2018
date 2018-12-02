@@ -1,3 +1,5 @@
+
+
 .on {
   background-color: #00e046;
 }
@@ -59,15 +61,12 @@
 
 .container-sensor {
   padding: 2px;
-  display: none;
 }
 
-.container-sensor.is-active{
-  display: block;
+.container-sensor.is-active {
 }
 
-.container-sensor.is-inactive{
-  display: none;
+.container-sensor.is-inactive {
 }
 
 
