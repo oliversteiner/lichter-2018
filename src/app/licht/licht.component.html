@@ -1,7 +1,7 @@
 <h1>{{title}}</h1>
 
 
-<h2 (click)="toggleAllDevices()">All Lights ({{allDevicesStatus}})</h2>
+<h2 (click)="toggleAllDevices()">All Lights ({{powerStatusAllDevices}})</h2>
 
 <ul class="devices-list">
     <li class="devices-list-item" *ngFor="let device of devices">
@@ -59,3 +59,9 @@
         </div>
     </li>
 </ul>
+
+
+<div>
+    <div>{{power}}</div>
+    <div>{{sensor}}</div>
+</div>
