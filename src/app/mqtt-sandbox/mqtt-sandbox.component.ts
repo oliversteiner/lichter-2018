@@ -27,7 +27,6 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
     public test_topic: string;
     private test_message: any;
     private result: any;
-    private result2: string;
 
 
     constructor(private _mqttService: MqttService) {
@@ -220,7 +219,7 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
         this.subscription_power.unsubscribe();
         this.subscription_sensor.unsubscribe();
         this.subscription_status.unsubscribe();
-        this.subscription_test.unsubscribe();
+      //  this.subscription_test.unsubscribe();
         this.subscription_result.unsubscribe();
         this.subscription_timer.unsubscribe();
 
