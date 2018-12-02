@@ -41,6 +41,9 @@ export class LichtComponent implements OnInit {
         // set Status of sensorDetails to 'closed'
         for (const device of this.devices) {
             device.sensorDetails = false;
+            device.timerIcon = 'Timer';
+            device.powerIcon = 'Power';
+            device.sensorIcon = 'Sensor';
 
         }
     }
@@ -51,7 +54,8 @@ export class LichtComponent implements OnInit {
     toggleTimer(device: Device): void {
         if (device.timer === true) {
             device.timer = false;
-        } else {
+        }
+         else {
             device.timer = true;
         }
     }

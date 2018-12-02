@@ -1,6 +1,9 @@
 
 
 export interface Device {
+    sensorIcon?: string;
+    powerIcon?: string;
+    timerIcon?: string;
     name: string;
     timer: boolean;
     power: boolean;

@@ -14,7 +14,7 @@
 
                   (click)="toggleTimer(device)">
 
-            {{device.timer}}
+            {{device.timerIcon}}
         </span>
 
             <!-- power -->
@@ -24,7 +24,7 @@
                   [class.off]="device.power === false"
 
                   (click)="togglePower(device)">
-            {{device.power}}
+            {{device.powerIcon}}
         </span>
 
             <!-- name -->
@@ -36,7 +36,7 @@
             <span *ngIf="device.sensor" class="item-sensor"
 
                   (click)="toggleDetails(device)">
-            sensor
+            {{device.sensorIcon}}
         </span>
         </div>
 
