@@ -90,19 +90,23 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
             const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
             // Set updated data to Device
-            const timerStatus = mqttResponse.Timer1.Arm;
 
-            // Check
-            switch (timerStatus) {
-                case 1:
-                    this.timerStatus = 'ON';
-                    break;
-                case 0:
-                    this.timerStatus = 'OFF';
-                    break;
-                default:
-                    this.timerStatus = 'Unbekannt';
-                    break;
+            // Timer
+            if (mqttResponse.Timer1) {
+                const timerStatus = mqttResponse.Timer1.Arm;
+
+                // Check
+                switch (timerStatus) {
+                    case 1:
+                        this.timerStatus = 'ON';
+                        break;
+                    case 0:
+                        this.timerStatus = 'OFF';
+                        break;
+                    default:
+                        this.timerStatus = 'Unbekannt';
+                        break;
+                }
             }
 
         });
@@ -160,17 +164,29 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
     }
 
+    // Dont Use:
+    // {"Command":"Error"}
+    public getSensorStatus(): void {
+        const topic = 'cmnd/sonoff/SENSOR';
+        const message = '';
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+
+    }
 
     public getSensorData(): void {
+
+        //    this.getSensorStatus(); // dont use: response error
+
         const topic = 'cmnd/sonoff/TelePeriod';
         let message = '10';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 
+        // After 2 minutes reduce sensor activation back to 5 Minutes
         setTimeout(() => {
-                message = '60';
+                message = '300'; // in Seconds
                 this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
             },
-            1000
+            2000 // in Miliseconds
         );
     }
 
