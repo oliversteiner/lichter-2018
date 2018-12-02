@@ -3,6 +3,8 @@ import {SonoffTimer} from '../_models/sonoffTimer';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {Subscription} from 'rxjs';
 import {MqttResponse} from '../_models/mqttResponse';
+import {Device} from '../_models/devices';
+import {DEVICES} from '../../assets/data/devices';
 
 @Component({
     selector: 'app-timer',
@@ -23,6 +25,9 @@ export class TimerComponent implements OnInit, OnDestroy {
     private sonoffTimers: SonoffTimer[];
     private globalTimerArm: number;
 
+    // Devices from Data
+    private devices: Device[] = DEVICES;
+
     constructor(private _mqttService: MqttService) {
 
         this.sonoffTimers = [];
@@ -31,42 +36,44 @@ export class TimerComponent implements OnInit, OnDestroy {
         this.sonoffTimers[1] = new SonoffTimer();
         this.globalTimerArm = 0;
 
-        // get Timer1
+        for (const device of this.devices) {
 
-        // Result Response
-        this.subscription_result = this._mqttService.observe('stat/sonoff/RESULT')
-            .subscribe((message: IMqttMessage) => {
+            // get Timer1
 
-                this.result = message.payload.toString();
-                console.log('result', this.result);
+            // Result Response
+            this.subscription_result = this._mqttService.observe('stat/' + device.id + '/RESULT')
+                .subscribe((message: IMqttMessage) => {
 
-                const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
+                    this.result = message.payload.toString();
+                    console.log('result', this.result);
+
+                    const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
 
-                // Global Timer Arm
-                if (mqttResponse.Timers && mqttResponse.Timers === 'ON') {
-                    this.globalTimerArm = 1;
-                }
+                    // Global Timer Arm
+                    if (mqttResponse.Timers && mqttResponse.Timers === 'ON') {
+                        this.globalTimerArm = 1;
+                    }
 
-                if (mqttResponse.Timers && mqttResponse.Timers === 'OFF') {
-                    this.globalTimerArm = 0;
-                }
+                    if (mqttResponse.Timers && mqttResponse.Timers === 'OFF') {
+                        this.globalTimerArm = 0;
+                    }
 
-                // Timer Power ON
-                if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer1) {
-                    this.sonoffTimers[0] = mqttResponse.Timers1.Timer1;
-                }
+                    // Timer Power ON
+                    if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer1) {
+                        this.sonoffTimers[0] = mqttResponse.Timers1.Timer1;
+                    }
 
-                // Timer Power OFF
-                if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer2) {
-                    this.sonoffTimers[1] = mqttResponse.Timers1.Timer2;
-                }
+                    // Timer Power OFF
+                    if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer2) {
+                        this.sonoffTimers[1] = mqttResponse.Timers1.Timer2;
+                    }
 
-                // Update GUI
-                this.checkTimerStatus();
+                    // Update GUI
+                    this.checkTimerStatus();
 
-            });
-
+                });
+        }
         this.getTimerStatus();
 
 

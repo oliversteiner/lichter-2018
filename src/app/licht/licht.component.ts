@@ -165,13 +165,13 @@ export class LichtComponent implements OnInit {
         }
     }
 
-    toggleAllDevices() {
+    togglePowerAll() {
 
         if (this.powerStatusAllDevices === false) {
             this.powerStatusAllDevices = true;
 
             for (const device of this.devices) {
-                device.power = true;
+                this.powerOn(device);
 
             }
 
@@ -179,7 +179,7 @@ export class LichtComponent implements OnInit {
             this.powerStatusAllDevices = false;
 
             for (const device of this.devices) {
-                device.power = false;
+                this.powerOff(device);
 
             }
         }
