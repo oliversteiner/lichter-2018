@@ -8,6 +8,7 @@ export interface Device {
     powerIcon?: string;
     timerIcon?: string;
     name: string;
+    place?: string; // Standort
     id: string;
     timer: boolean;
     power: boolean;

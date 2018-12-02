@@ -5,6 +5,7 @@ export const DEVICES: Device[] =
     [
         {
             name: 'Test',
+            place: 'Wohnzimmer Oli',
             timer: true,
             power: false,
             online: true,
