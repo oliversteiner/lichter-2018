@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
+import {MqttResponse} from '../_models/mqttResponse';
 
 @Component({
     selector: 'app-mqtt-sandbox',
@@ -16,36 +17,49 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
     private subscription_status: Subscription;
     private subscription_test: Subscription;
     private subscription_result: Subscription;
+    private subscription_timer: Subscription;
     public message: string;
     public power: string;
+    public timerStatus: string;
     public sensor: string;
     public status: string;
     public testresult: string;
     public test_topic: string;
     private test_message: any;
     private result: any;
+    private result2: string;
 
 
     constructor(private _mqttService: MqttService) {
 
+        this.test_topic = '';
         //  this.test_topic = 'sonoff/Timers';
         //  this.test_topic = 'sonoff/SENSOR';
-        this.test_topic = 'cmnd/sonoff/Timer1';
-        this.test_message = '{"Arm":1,"Time":"01:57","Window":0,"Days":"SM00TFS","Repeat":1,"Output":1,"Action":1}';
+        // this.test_topic = 'cmnd/sonoff/Timer1';
+        // this.test_message = '{"Arm":1,"Time":"01:57","Window":0,"Days":"SM00TFS","Repeat":1,"Output":1,"Action":1}';
 
+        // World
         this.subscription_world = this._mqttService.observe('/World').subscribe((message: IMqttMessage) => {
             console.log('message', message.payload);
             this.message = message.payload.toString();
 
         });
 
-
+        // Power
         this.subscription_power = this._mqttService.observe('stat/sonoff/POWER').subscribe((message: IMqttMessage) => {
             console.log('power', message.payload);
             this.power = message.payload.toString();
 
         });
 
+        // Timer
+        this.subscription_timer = this._mqttService.observe('tele/sonoff/Timers').subscribe((message: IMqttMessage) => {
+            console.log('timer1', message.payload);
+            this.timerStatus = message.payload.toString();
+
+        });
+
+        // Sensor
         this.subscription_sensor = this._mqttService.observe('tele/sonoff/SENSOR').subscribe((message: IMqttMessage) => {
             console.log('sensor', message.payload);
 
@@ -55,6 +69,7 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
         });
 
+        // Status
         this.subscription_status = this._mqttService.observe('tele/sonoff/STATE').subscribe((message: IMqttMessage) => {
             console.log('status', message.payload);
 
@@ -64,15 +79,36 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
         });
 
-        this.subscription_result = this._mqttService.observe('tele/sonoff/RESULT').subscribe((message: IMqttMessage) => {
+
+        // Result Response
+        this.subscription_result = this._mqttService.observe('stat/sonoff/RESULT').subscribe((message: IMqttMessage) => {
             console.log('result', message.payload);
 
             this.result = message.payload.toString();
             console.log('result', this.result);
 
+            const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
+
+            // Set updated data to Device
+            const timerStatus = mqttResponse.Timer1.Arm;
+
+            // Check
+            switch (timerStatus) {
+                case 1:
+                    this.timerStatus = 'ON';
+                    break;
+                case 0:
+                    this.timerStatus = 'OFF';
+                    break;
+                default:
+                    this.timerStatus = 'Unbekannt';
+                    break;
+            }
 
         });
 
+
+        // Test
         if (this.test_topic !== '') {
             this.subscription_test = this._mqttService.observe(this.test_topic).subscribe((message: IMqttMessage) => {
                 console.log('test', message.payload);
@@ -83,6 +119,8 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
             });
         }
+
+
     }
 
 
@@ -90,7 +128,6 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
         const topic = 'cmnd/sonoff/power';
         const message = 'ON';
 
-        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 
     }
@@ -102,9 +139,16 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
     }
 
-    public getPowerStatue(): void {
+    public getPowerStatus(): void {
         const topic = 'cmnd/sonoff/power';
         const message = '';
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+
+    }
+
+    public getTimerStatus(): void {
+        const topic = 'cmnd/sonoff/Timer';
+        const message = '1';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 
     }
@@ -149,8 +193,6 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
     }
 
 
-
-
     public ngOnDestroy() {
 
         const topic = 'cmnd/sonoff/TelePeriod';
@@ -164,6 +206,7 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
         this.subscription_status.unsubscribe();
         this.subscription_test.unsubscribe();
         this.subscription_result.unsubscribe();
+        this.subscription_timer.unsubscribe();
 
 
     }

@@ -6,48 +6,54 @@
 
 <button (click)="powerOn()">On</button>
 <button (click)="powerOff()">Off</button>
-<button (click)="getPowerStatue()">Power</button>
+<button (click)="getPowerStatus()">Power</button>
+<button (click)="getTimerStatus()">Timer Status</button>
 <button (click)="getSensorData()">Sensor</button>
 <button (click)="getStatus()">Status</button>
 <button (click)="test()">Test</button>
 <button (click)="setTimezone()">set Timezone</button>
 
 <code>
-<div>
-    <label>Status:
-        <input [(ngModel)]="status" placeholder="status">
-    </label>
-</div>
 
-<div>
-    <label>status:
-        <span>{{status}}</span>
-    </label>
-</div>
-<div>
-    <label>sensor:
+    <!-- status -->
+    <div>
+        <label>status:
+            <span>{{status}}</span>
+        </label>
+    </div>
 
-        <span>{{sensor}}</span>
-    </label>
-</div>
-<div>
-    <label>power:
+    <!-- sensor -->
+    <div>
+        <label>sensor:
+            <span>{{sensor}}</span>
+        </label>
+    </div>
 
-        <span>{{power}}</span>
-    </label>
-</div>
+    <!-- power -->
+    <div>
+        <label>power:
+            <span>{{power}}</span>
+        </label>
+    </div>
 
-
-<div>
-    <label>result:
-        <span>{{result}}</span>
-    </label>
-</div>
+    <!-- Timer -->
+    <div>
+        <label>Timer:
+            <span>{{timerStatus}}</span>
+        </label>
+    </div>
 
 
-<div>
-    <label>test:
-        <span>{{testresult}}</span>
-    </label>
-</div>
+    <div>
+        <label>Telemetrie:
+            <span>{{result}}</span>
+        </label>
+    </div>
+
+
+    <div>
+        <label>test:
+            <span>{{testresult}}</span>
+        </label>
+    </div>
 </code>
