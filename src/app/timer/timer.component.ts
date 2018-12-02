@@ -14,18 +14,22 @@ export class TimerComponent implements OnInit, OnDestroy {
     private powerOnLabel = 'Einschalten';
     private powerOffLabel = 'Ausschalten';
 
+    private powerOnEdit = 0;
+    private powerOffEdit = 0;
+
     private timerStatus: string;
     private subscription_result: Subscription;
     private result: string;
-    private sonoffTimer: SonoffTimer;
-    private sonoffTimerOn: SonoffTimer;  // Timer1
-    private sonoffTimerOff: SonoffTimer; // Timer2
-    private currentTimer: number;
+    private sonoffTimers: SonoffTimer[];
+    private globalTimerArm: number;
 
     constructor(private _mqttService: MqttService) {
 
-        this.currentTimer = 1;
-        this.sonoffTimer = new SonoffTimer();
+        this.sonoffTimers = [];
+
+        this.sonoffTimers[0] = new SonoffTimer();
+        this.sonoffTimers[1] = new SonoffTimer();
+        this.globalTimerArm = 0;
 
         // get Timer1
 
@@ -39,13 +43,27 @@ export class TimerComponent implements OnInit, OnDestroy {
                 const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
 
-                // Timer
-                if (mqttResponse.Timer1) {
-                    this.sonoffTimer = mqttResponse.Timer1;
-
-                    this.checkTimerStatus();
-
+                // Global Timer Arm
+                if (mqttResponse.Timers && mqttResponse.Timers === 'ON') {
+                    this.globalTimerArm = 1;
                 }
+
+                if (mqttResponse.Timers && mqttResponse.Timers === 'OFF') {
+                    this.globalTimerArm = 0;
+                }
+
+                // Timer Power ON
+                if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer1) {
+                    this.sonoffTimers[0] = mqttResponse.Timers1.Timer1;
+                }
+
+                // Timer Power OFF
+                if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer2) {
+                    this.sonoffTimers[1] = mqttResponse.Timers1.Timer2;
+                }
+
+                // Update GUI
+                this.checkTimerStatus();
 
             });
 
@@ -55,20 +73,16 @@ export class TimerComponent implements OnInit, OnDestroy {
     }
 
     private checkTimerStatus() {
-    // Check status
-        if (this.sonoffTimer && this.sonoffTimer.Arm) {
-            switch (this.sonoffTimer.Arm) {
-                case 1:
-                    this.timerStatus = 'Timer an';
-                    break;
-                case 0:
-                    this.timerStatus = 'Timer aus';
-                    break;
-                default:
-                    this.timerStatus = 'Timer Status unbekannt';
-                    break;
-            }
+        console.log('this.timerStatus', this.timerStatus);
+
+        this.timerStatus = 'Timer aus';
+
+        // Check status
+        if (this.globalTimerArm) {
+            this.timerStatus = 'Timer an';
         }
+
+
     }
 
     ngOnInit() {
@@ -77,36 +91,85 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     toggleTimer() {
 
-        this.sonoffTimer.Arm = this.sonoffTimer.Arm === 1 ? 0 : 1;
-        this.checkTimerStatus();
 
+        let message = '0';
+        const topic = 'cmnd/sonoffs/Timers';
+
+        if (this.globalTimerArm === 1) {
+            this.globalTimerArm = 0;
+            message = '0';
+
+        } else {
+            this.globalTimerArm = 1;
+            message = '1';
+
+        }
+
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+        this.getTimerStatus();
     }
 
     public getTimerStatus(): void {
-        const topic = 'cmnd/sonoff/Timer';
-        const message = '1';
+        const topic = 'cmnd/sonoffs/Timers';
+        const message = '';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 
     }
 
+    powerOnEditToggle() {
+        this.powerOnEdit = this.powerOnEdit === 1 ? 0 : 1;
+    }
 
-    editTime(modus: string) {
+    powerOffEditToggle() {
+        this.powerOffEdit = this.powerOffEdit === 1 ? 0 : 1;
+    }
 
-        switch (modus) {
-            case 'on':
-                break;
 
-            case 'off':
-                break;
-
-            default:
-                break;
-        }
+    showInput(input) {
 
     }
 
-    jsonToList(json) {
+    hideInput(modus) {
 
+    }
+
+
+    setTimers(mode: string) {
+        //
+        if (mode === 'on') {
+
+            // end Edit Mode
+            this.powerOnEdit = 0;
+
+            // Set Default Sonoff Timer Values
+            this.sonoffTimers[0].Arm = 1;
+            this.sonoffTimers[0].Action = 1;
+            this.sonoffTimers[0].Days = '1111111';
+            this.sonoffTimers[0].Repeat = 1;
+            this.sonoffTimers[0].Output = 1;
+            this.setTimer(1, this.sonoffTimers[0]);
+        }
+
+        if (mode === 'off') {
+
+            // end Edit Mode
+            this.powerOffEdit = 0;
+
+            // Set Default Sonoff Timer Values
+            this.sonoffTimers[1].Arm = 1;
+            this.sonoffTimers[1].Action = 0;
+            this.sonoffTimers[1].Days = '1111111';
+            this.sonoffTimers[1].Repeat = 1;
+            this.sonoffTimers[1].Output = 1;
+            this.setTimer(2, this.sonoffTimers[1]);
+        }
+    }
+
+
+    public setTimer(timerNumber: number, data: SonoffTimer): void {
+        const topic = 'cmnd/sonoffs/Timer' + timerNumber;
+        const message = JSON.stringify(data);
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 
     }
 
@@ -115,18 +178,4 @@ export class TimerComponent implements OnInit, OnDestroy {
         this.subscription_result.unsubscribe();
 
     }
-
-    setOnTimer() {
-        //
-        this.setTimer(1, this.sonoffTimer);
-    }
-
-
-    public setTimer(timerNumber: number, data: SonoffTimer): void {
-        const topic = 'cmnd/sonoff/Timer' + timerNumber;
-        const message = JSON.stringify(data);
-        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
-
-    }
-
 }

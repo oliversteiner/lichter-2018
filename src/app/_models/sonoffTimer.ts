@@ -25,7 +25,7 @@ export class SonoffTimer {
     constructor() {
         this.Arm = 0;
         this.Mode = 0;
-        this.Time = '';
+        this.Time = '00:00';
         this.Window = 0;
         this.Days = '0000000';
         this.Repeat = 0;

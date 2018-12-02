@@ -14,13 +14,14 @@
             <div class="name">{{powerOnLabel}}</div>
 
             <!-- Time Display -->
-            <div class="time" (click)="editTime('on')">{{sonoffTimer.Time}}</div>
-
+            <div class="container-display" [class.hide]="powerOnEdit">
+                <div class="time" (click)="powerOnEditToggle('on')">{{sonoffTimers[0].Time}}</div>
+            </div>
             <!-- Time Edit -->
-            <div>
-                <input type="time" pattern="[0-9]{2}:[0-9]{2}" [(ngModel)]="sonoffTimer.Time" placeholder="Time">
+            <div class="container-edit" [class.show]="powerOnEdit">
+                <input type="time" pattern="[0-9]{2}:[0-9]{2}" [(ngModel)]="sonoffTimers[0].Time" placeholder="Time">
 
-                <button (click)="setOnTimer()">OK</button>
+                <button (click)="setTimers('on')">OK</button>
 
             </div>
 
@@ -31,57 +32,114 @@
             <div class="name">{{powerOffLabel}}</div>
 
             <!-- Time Display -->
-            <div class="time" (click)="editTime('off')">9.30</div>
+            <div class="container-display" [class.hide]="powerOffEdit">
+                <div class="time" (click)="powerOffEditToggle()">{{sonoffTimers[1].Time}}</div>
+            </div>
 
+            <!-- Time Edit -->
+            <div class="container-edit" [class.show]="powerOffEdit">
+                <input type="time" pattern="[0-9]{2}:[0-9]{2}" [(ngModel)]="sonoffTimers[1].Time" placeholder="Time">
+                <button (click)="setTimers('off')">OK</button>
 
+            </div>
         </div>
     </div>
 </div>
 
-<div class="debug">
+<div class="row">
+    <div class="debug">
 
-    <h2>Timer JSON</h2>
+        <h5>Timer JSON ON</h5>
 
-    <table class="debug-table">
-        <tr>
-            <th>Arm</th>
-            <td>{{sonoffTimer.Arm}}</td>
-        </tr>
+        <table class="debug-table">
+            <tr>
+                <th>Arm</th>
+                <td>{{sonoffTimers[0].Arm}}</td>
+            </tr>
 
-        <tr>
-            <th>Mode</th>
-            <td>{{sonoffTimer.Mode}}</td>
-        </tr>
+            <tr>
+                <th>Mode</th>
+                <td>{{sonoffTimers[0].Mode}}</td>
+            </tr>
 
-        <tr>
-            <th>Time</th>
-            <td>{{sonoffTimer.Time}}</td>
-        </tr>
+            <tr>
+                <th>Time</th>
+                <td>{{sonoffTimers[0].Time}}</td>
+            </tr>
 
-        <tr>
-            <th>Window</th>
-            <td>{{sonoffTimer.Window}}</td>
-        </tr>
+            <tr>
+                <th>Window</th>
+                <td>{{sonoffTimers[0].Window}}</td>
+            </tr>
 
-        <tr>
-            <th>Days</th>
-            <td>{{sonoffTimer.Days}}</td>
-        </tr>
+            <tr>
+                <th>Days</th>
+                <td>{{sonoffTimers[0].Days}}</td>
+            </tr>
 
-        <tr>
-            <th>Repeat</th>
-            <td>{{sonoffTimer.Repeat}}</td>
-        </tr>
+            <tr>
+                <th>Repeat</th>
+                <td>{{sonoffTimers[0].Repeat}}</td>
+            </tr>
 
-        <tr>
-            <th>Output</th>
-            <td>{{sonoffTimer.Output}}</td>
+            <tr>
+                <th>Output</th>
+                <td>{{sonoffTimers[0].Output}}</td>
 
-        </tr>
-        <tr>
-            <th>Action</th>
-            <td>{{sonoffTimer.Action}}</td>
-        </tr>
-    </table>
+            </tr>
+            <tr>
+                <th>Action</th>
+                <td>{{sonoffTimers[0].Action}}</td>
+            </tr>
+        </table>
 
+    </div>
+
+    <div class="debug">
+
+        <h5>Timer JSON Off</h5>
+
+        <table class="debug-table">
+            <tr>
+                <th>Arm</th>
+                <td>{{sonoffTimers[1].Arm}}</td>
+            </tr>
+
+            <tr>
+                <th>Mode</th>
+                <td>{{sonoffTimers[1].Mode}}</td>
+            </tr>
+
+            <tr>
+                <th>Time</th>
+                <td>{{sonoffTimers[1].Time}}</td>
+            </tr>
+
+            <tr>
+                <th>Window</th>
+                <td>{{sonoffTimers[1].Window}}</td>
+            </tr>
+
+            <tr>
+                <th>Days</th>
+                <td>{{sonoffTimers[1].Days}}</td>
+            </tr>
+
+            <tr>
+                <th>Repeat</th>
+                <td>{{sonoffTimers[1].Repeat}}</td>
+            </tr>
+
+            <tr>
+                <th>Output</th>
+                <td>{{sonoffTimers[1].Output}}</td>
+
+            </tr>
+            <tr>
+                <th>Action</th>
+                <td>{{sonoffTimers[1].Action}}</td>
+            </tr>
+        </table>
+
+    </div>
 </div>

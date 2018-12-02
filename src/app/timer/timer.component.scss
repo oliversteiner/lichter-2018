@@ -1,4 +1,4 @@
-.header{
+.header {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -6,34 +6,60 @@
   text-align: center;
 }
 
-.main{
+.main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 50px;
 }
 
-.row{
+.row {
   display: flex;
-margin: 20px;
+  margin: 20px;
 }
 
-.name{
+.name {
   color: gray;
-margin-right: 20px;
-}
-
-h2{
-}
-
-.timer-status {
-
+  margin-right: 20px;
 }
 
 
-.debug-table{
-th{
-  text-align: left;
-padding-right: 20px;
+.container-edit {
+  display: none;
+
+  &.show {
+    display: inline;
+  }
 }
+
+.container-display {
+  display: block;
+
+  &.hide {
+    display: none;
+  }
+}
+
+
+// DEBUG
+// ====================
+
+.debug {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid silver;
+
+  h5 {
+    color: gray;
+    text-align: center;
+    margin: 0 0 10px 0;
+    padding: 0;
+  }
+}
+
+.debug-table {
+  th {
+    text-align: left;
+    padding-right: 20px;
+  }
 }
