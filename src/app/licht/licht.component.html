@@ -42,9 +42,9 @@
 
 
         <!-- sensors -->
-        <div *ngIf="device.sensor" [@openClose]="device.sensorDetails ? 'open' : 'closed'" class="container-sensor"
-
-
+        <div *ngIf="device.sensor"
+             [@openClose]="device.sensorDetails ? 'open' : 'closed'"
+             class="container-sensor"
         >
             <!-- temperature-->
             <div class="item-temperature">
