@@ -19,6 +19,7 @@ import {FooterComponent} from './footer/footer.component';
 import {HeaderComponent} from './header/header.component';
 import {NavigationComponent} from './navigation/navigation.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     clientId: 'lichter-2018-b',
@@ -50,6 +51,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         AppRoutingModule,
         FormsModule,
         MqttModule.forRoot(MQTT_SERVICE_OPTIONS),
+        FontAwesomeModule,
 
 
     ],
