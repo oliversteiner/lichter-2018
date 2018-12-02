@@ -62,7 +62,13 @@ export class LichtComponent implements OnInit {
             device.subscriptionPower = this._mqttService.observe('stat/' + device.id + '/POWER')
                 .subscribe((message: IMqttMessage) => {
 
+                    // Debug
                     console.log(device.id + ' Power:', message.payload.toString());
+
+                    // Device Online?
+                    device.online = true;
+
+                    // Powerstatus
                     const status = message.payload.toString();
 
                     // Check
@@ -70,9 +76,11 @@ export class LichtComponent implements OnInit {
                         case 'ON':
                             device.power = true;
                             break;
+
                         case 'OFF':
                             device.power = false;
                             break;
+
                         default:
                             device.power = false;
                             break;
@@ -82,7 +90,7 @@ export class LichtComponent implements OnInit {
 
             // Subscription Sensor
             if (device.sensor) {
-                device.subscriptionPower = this._mqttService.observe('tele/' + device.id + '/SENSOR')
+                device.subscriptionSensor = this._mqttService.observe('tele/' + device.id + '/SENSOR')
                     .subscribe((message: IMqttMessage) => {
 
                         console.log(device.id + ' Sensor:', message.payload.toString());
@@ -94,8 +102,29 @@ export class LichtComponent implements OnInit {
                     });
             }
 
+            // Subscription Result
+            if (device.sensor) {
+                device.subscriptionResult = this._mqttService.observe('stat/' + device.id + '/RESULT')
+                    .subscribe((message: IMqttMessage) => {
+
+                        console.log(device.id + ' Result:', message.payload.toString());
+                        const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
+
+                        // Global Timer Arm
+                        if (mqttResponse.Timers && mqttResponse.Timers === 'ON') {
+                            device.timer = true;
+                        }
+
+                        if (mqttResponse.Timers && mqttResponse.Timers === 'OFF') {
+                            device.timer = false;
+                        }
+
+                    });
+            }
+
 
             this.getPowerStatus(device);
+            this.getTimerStatus(device);
 
         }
     }
@@ -104,11 +133,22 @@ export class LichtComponent implements OnInit {
     }
 
     toggleTimer(device: Device): void {
-        if (device.timer === true) {
+        let message = '0';
+        const topic = 'cmnd/' + device.id + '/Timers';
+
+        if (device.timer) {
             device.timer = false;
+            message = '0';
+
         } else {
             device.timer = true;
+            message = '1';
+
         }
+
+        this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
+        this.getTimerStatus(Device);
+
     }
 
     togglePower(device: Device): void {
@@ -177,7 +217,7 @@ export class LichtComponent implements OnInit {
 
 
     public getTimerStatus(device): void {
-        const topic = 'cmnd/' + device.id + '/power';
+        const topic = 'cmnd/' + device.id + '/timers';
         const message = '';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 

@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AM2301Sensor} from '../_models/AM2301Sensor';
 import {Device} from '../_models/devices';
 import {DEVICES} from '../../assets/data/devices';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
@@ -18,10 +17,7 @@ export class SensorenComponent implements OnInit {
 
     constructor(private _mqttService: MqttService) {
 
-        // set Status of sensorDetails to 'closed'
         for (const device of this.devices) {
-            device.sensorDetails = false;
-
 
             // Subscriptions
             // -----------------------------------------------------
@@ -31,7 +27,12 @@ export class SensorenComponent implements OnInit {
                 device.subscriptionSensor = this._mqttService.observe('tele/' + device.id + '/SENSOR')
                     .subscribe((message: IMqttMessage) => {
 
+                        // Debug
                         console.log(device.id + ' Sensor:', message.payload.toString());
+
+                        // Device Online?
+                        device.online = true;
+
                         const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
                         // Set updated data to Device

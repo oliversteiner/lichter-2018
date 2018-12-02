@@ -2,6 +2,7 @@ import {Subscription} from 'rxjs';
 
 
 export interface Device {
+    subscriptionResult?: Subscription;
     subscriptionPower?: Subscription;
     subscriptionSensor?: Subscription;
     sensorIcon?: string;

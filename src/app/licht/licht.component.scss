@@ -1,5 +1,4 @@
 
-
 .on {
   background-color: #00e046;
 }
@@ -64,10 +63,17 @@
 }
 
 
-
 .item-humidity,
 .item-temperature {
   display: inline-block;
   padding: 10px;
   margin: 10px;
 }
+
+
+.offline {
+  opacity: 0.3;
+}
+
+
+

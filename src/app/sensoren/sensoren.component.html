@@ -6,7 +6,7 @@
 <ul>
     <li *ngFor="let device of  devices ">
 
-        <div *ngIf="device.sensor" class="sensor-container">
+        <div *ngIf="device.sensor" [class.offline]="!device.online" class="sensor-container">
 
 
             <h2 *ngIf="device.place">{{device.place}}</h2>
