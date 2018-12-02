@@ -1,2 +1,87 @@
 <h1>{{title}}</h1>
 
+<div class="header">
+    <div (click)="toggleTimer()">
+        <h2>Uhr</h2>
+        <p class="timer-status">{{timerStatus}}</p>
+    </div>
+</div>
+
+<div class="main">
+
+    <div>
+        <div class="row">
+            <div class="name">{{powerOnLabel}}</div>
+
+            <!-- Time Display -->
+            <div class="time" (click)="editTime('on')">{{sonoffTimer.Time}}</div>
+
+            <!-- Time Edit -->
+            <div>
+                <input type="time" pattern="[0-9]{2}:[0-9]{2}" [(ngModel)]="sonoffTimer.Time" placeholder="Time">
+
+                <button (click)="setOnTimer()">OK</button>
+
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="name">{{powerOffLabel}}</div>
+
+            <!-- Time Display -->
+            <div class="time" (click)="editTime('off')">9.30</div>
+
+
+        </div>
+    </div>
+</div>
+
+<div class="debug">
+
+    <h2>Timer JSON</h2>
+
+    <table class="debug-table">
+        <tr>
+            <th>Arm</th>
+            <td>{{sonoffTimer.Arm}}</td>
+        </tr>
+
+        <tr>
+            <th>Mode</th>
+            <td>{{sonoffTimer.Mode}}</td>
+        </tr>
+
+        <tr>
+            <th>Time</th>
+            <td>{{sonoffTimer.Time}}</td>
+        </tr>
+
+        <tr>
+            <th>Window</th>
+            <td>{{sonoffTimer.Window}}</td>
+        </tr>
+
+        <tr>
+            <th>Days</th>
+            <td>{{sonoffTimer.Days}}</td>
+        </tr>
+
+        <tr>
+            <th>Repeat</th>
+            <td>{{sonoffTimer.Repeat}}</td>
+        </tr>
+
+        <tr>
+            <th>Output</th>
+            <td>{{sonoffTimer.Output}}</td>
+
+        </tr>
+        <tr>
+            <th>Action</th>
+            <td>{{sonoffTimer.Action}}</td>
+        </tr>
+    </table>
+
+</div>

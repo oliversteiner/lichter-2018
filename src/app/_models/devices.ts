@@ -24,7 +24,6 @@ export interface Device {
 export class Device {
 
 
-
     constructor(
         public name: string,
         public timer: boolean,
