@@ -1,18 +1,21 @@
+import {Subscription} from 'rxjs';
 
 
 export interface Device {
+    subscriptionPower?: Subscription;
+    subscriptionSensor?: Subscription;
     sensorIcon?: string;
     powerIcon?: string;
     timerIcon?: string;
     name: string;
+    id: string;
     timer: boolean;
     power: boolean;
     online: boolean;
     sensor: boolean;
     temperature?: number;
     humidity?: number;
-    mqtt_group?: string;
-    mqtt_name?: string;
+    group?: string;
 
     // helper
     sensorDetails?: boolean;
