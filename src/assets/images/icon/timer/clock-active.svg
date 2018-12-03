@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="650px" height="650px" viewBox="0 0 650 650" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.5 (67469) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/timer/clock active</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon/timer/clock-active" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill="#6AC600" cx="325" cy="325" r="248"></circle>
+        <path d="M325,77 C188,77 77,188 77,325 C77,462 188,573 325,573 C462,573 573,462 573,325 C573,188 462,77 325,77 Z M541,325 C541,443.7 444.9,541 325,541 C206.3,541 109,444.9 109,325 C109,206.3 205.1,109 325,109 C443.7,109 541,205.1 541,325 Z M392.1,413.3 L310.9,354.3 C307.8,352 306,348.4 306,344.6 L306,185 C306,178.4 311.4,173 318,173 L332,173 C338.6,173 344,178.4 344,185 L344,331.3 L414.5,382.6 C419.9,386.5 421,394 417.1,399.4 L408.9,410.7 C405,416 397.5,417.2 392.1,413.3 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
+    </g>
+</svg>
