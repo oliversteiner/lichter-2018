@@ -1,7 +1,12 @@
-<h1>{{title}}</h1>
 
-<button (click)="getAllData()">Aktualisieren</button>
-
+<div class="header-icon">
+    <div (click)="getAllData()">
+        <!-- Timer ON -->
+        <div class="icon">
+            <img src="../../assets/images/icon/sensor/sensor.svg" alt="">
+        </div>
+    </div>
+</div>
 
 <ul>
     <li *ngFor="let device of  devices ">

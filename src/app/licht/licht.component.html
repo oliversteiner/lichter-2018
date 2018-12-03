@@ -1,7 +1,21 @@
 <h1>{{title}}</h1>
 
+<div class="header-icon">
 
-<h2 (click)="togglePowerAll()">All Lights ({{powerStatusAllDevices}})</h2>
+    <div (click)="togglePowerAll()">
+        <div *ngIf="!powerStatusAllDevices">
+            <div class="icon">
+                <img src="../../assets/images/icon/power/lightbulb-off.svg" alt="">
+            </div>
+        </div>
+
+        <div *ngIf="powerStatusAllDevices">
+            <div class="icon">
+                <img src="../../assets/images/icon/power/lightbulb-on.svg" alt="">
+            </div>
+        </div>
+    </div>
+</div>
 
 <ul class="devices-list">
     <li class="devices-list-item" *ngFor="let device of devices">
@@ -9,23 +23,45 @@
             <!-- timer -->
             <span class="item-timer"
 
-                  [class.on]="device.timer === true"
-                  [class.off]="device.timer === false"
-
                   (click)="toggleTimer(device)">
 
-            {{device.timerIcon}}
-        </span>
+                 <!-- Timer ON -->
+                <div *ngIf="device.timer === true">
+                    <div class="icon">
+                        <img src="../../assets/images/icon/timer/clock-on.svg" alt="">
+                    </div>
+                </div>
+
+                <!-- Timer Off -->
+                <div *ngIf="device.timer === false">
+                    <div class="icon">
+                        <img src="../../assets/images/icon/timer/clock-off.svg" alt="">
+                    </div>
+                </div>
+
+            </span>
 
             <!-- power -->
             <span class="item-power"
 
-                  [class.on]="device.power === true"
-                  [class.off]="device.power === false"
 
                   (click)="togglePower(device)">
-            {{device.powerIcon}}
-        </span>
+
+                <!-- Power ON -->
+                <div *ngIf="device.power === true">
+                    <div class="icon">
+                        <img src="../../assets/images/icon/power/lightbulb-on.svg" alt="">
+                    </div>
+                </div>
+
+                <!-- Power Off -->
+                <div *ngIf="device.power === false">
+                    <div class="icon">
+                        <img src="../../assets/images/icon/power/lightbulb-off.svg" alt="">
+                    </div>
+                </div>
+
+            </span>
 
             <!-- name -->
             <span class="item-name">
@@ -36,7 +72,8 @@
             <span *ngIf="device.sensor" class="item-sensor"
 
                   (click)="toggleDetails(device)">
-            {{device.sensorIcon}}
+               <fa-icon [icon]="iconSensor"></fa-icon>
+
         </span>
         </div>
 

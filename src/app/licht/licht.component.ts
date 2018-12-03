@@ -2,10 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Device} from '../_models/devices';
 import {DEVICES} from '../../assets/data/devices';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Subscription} from 'rxjs';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {MqttResponse} from '../_models/mqttResponse';
-
+import {faTemperatureFrigid, faClock, faLightbulb, faLightbulbOn} from '@fortawesome/pro-light-svg-icons';
 
 @Component({
     selector: 'app-licht',
@@ -40,6 +39,13 @@ export class LichtComponent implements OnInit {
 
     // Devices from Data
     devices: Device[] = DEVICES;
+
+    // Icons
+    iconSensor = faTemperatureFrigid;
+    iconTimer = faClock;
+    iconPowerOff = faLightbulb;
+    iconPowerOn = faLightbulbOn;
+
 
 // MQTT
     public power: string;

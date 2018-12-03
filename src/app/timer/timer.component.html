@@ -1,8 +1,22 @@
 <h1>{{title}}</h1>
 
-<div class="header">
+<div class="header-icon">
     <div (click)="toggleTimer()">
-        <h2>Uhr</h2>
+
+        <!-- Timer ON -->
+        <div *ngIf="globalTimerArm === 1">
+            <div class="icon">
+                <img src="../../assets/images/icon/timer/clock-on.svg" alt="">
+            </div>
+        </div>
+
+        <!-- Timer Off -->
+        <div *ngIf="globalTimerArm === 0">
+            <div class="icon">
+                <img src="../../assets/images/icon/timer/clock-off.svg" alt="">
+            </div>
+        </div>
+
         <p class="timer-status">{{timerStatus}}</p>
     </div>
 </div>

@@ -3,6 +3,7 @@ import {Device} from '../_models/devices';
 import {DEVICES} from '../../assets/data/devices';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {MqttResponse} from '../_models/mqttResponse';
+import {faTemperatureFrigid} from '@fortawesome/pro-light-svg-icons';
 
 @Component({
     selector: 'app-sensoren',
@@ -14,6 +15,9 @@ export class SensorenComponent implements OnInit {
 
     // Devices from Data
     devices: Device[] = DEVICES;
+
+    // Icons
+    iconSensor = faTemperatureFrigid;
 
     constructor(private _mqttService: MqttService) {
 
