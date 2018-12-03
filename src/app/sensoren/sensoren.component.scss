@@ -1,6 +1,6 @@
 .row {
   display: flex;
-
+justify-content: space-around;
 }
 
 .col {
@@ -29,4 +29,16 @@ li {
   list-style: none;
 }
 
+.value{
+  font-size: 35px;
+  margin-right: 2px;
+  font-weight: bold;
+}
 
+.unit{
+  margin-top: 5px;
+}
+
+.col{
+display: flex;
+}

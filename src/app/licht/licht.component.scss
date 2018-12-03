@@ -19,8 +19,9 @@
 
 .devices-list-item {
   list-style: none;
-  padding: 10px;
   border-bottom: 1px solid silver;
+  margin: 0;
+  padding: 0;
 }
 
 
@@ -28,9 +29,7 @@
 .item-power,
 .item-name,
 .item-sensor {
-  padding: 2px;
   margin: 0 5px;
-  min-width: 50px;
   display: inline-block;
   text-align: center;
 }
@@ -59,7 +58,6 @@
 }
 
 .container-sensor {
-  padding: 2px;
 }
 
 
@@ -68,4 +66,34 @@
   display: inline-block;
   padding: 10px;
   margin: 10px;
+}
+
+
+.item-container{
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+
+.row{
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.value{
+  font-size: 20px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.unit{
+}
+
+.col{
+  display: flex;
+  align-items: center;
+
 }

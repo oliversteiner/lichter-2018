@@ -12,7 +12,12 @@ import {DEVICES} from '../../assets/data/devices';
     styleUrls: ['./timer.component.scss']
 })
 export class TimerComponent implements OnInit, OnDestroy {
+
+    // General
     private title = 'Timer';
+    private debug = false;
+
+
     private powerOnLabel = 'Einschalten';
     private powerOffLabel = 'Ausschalten';
 

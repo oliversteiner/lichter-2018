@@ -1,3 +1,5 @@
+$color-font-label: #979797;
+
 html, body {
   font-family: 'Roboto', sans-serif;
 }
@@ -14,16 +16,36 @@ ul, li {
 
 .icon {
   display: inline-block;
-  width: 50px;
-  height: 50px;
+  width: 76px;
+  height: 76px;
   background-color: gray;
 
   img {
     width: 100%;
     height: 100%;
   }
+
+  &.medium{
+    width: 50px;
+    height: 50px;
+  }
+
+  &.small{
+    width: 25px;
+    height: 25px;
+  }
+
 }
 
+
+
+
+.label {
+  font-size: 20px;
+  color: $color-font-label;
+  text-align: center;
+  font-weight: 300;
+}
 
 .header-icon {
   display: flex;
@@ -69,7 +91,7 @@ ul, li {
 // ====================
 
 .debug {
-  display: flex;
+  display: none;
   justify-content: space-around;
 
 
@@ -94,3 +116,8 @@ ul, li {
     padding-right: 20px;
   }
 }
+
+.debug.active {
+  display: flex;
+}
+

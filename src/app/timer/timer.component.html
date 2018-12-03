@@ -28,7 +28,7 @@
 
     <div>
         <div class="row">
-            <div class="name">{{powerOnLabel}}</div>
+            <div class="timer-label"><span class="label">{{powerOnLabel}}</span></div>
 
             <!-- Time Display -->
             <div class="container-display" [class.hide]="powerOnEdit">
@@ -46,7 +46,7 @@
         </div>
 
         <div class="row">
-            <div class="name">{{powerOffLabel}}</div>
+            <div class="timer-label"><span class="label">{{powerOffLabel}}</span></div>
 
             <!-- Time Display -->
             <div class="container-display" [class.hide]="powerOffEdit">
@@ -64,7 +64,7 @@
 </div>
 
 <!-- Debug -->
-<div class="debug">
+<div class="debug" [class.active]="debug">
 
     <div class="row">
         <div class="debug-item">

@@ -9,9 +9,10 @@
   margin: 20px;
 }
 
-.name {
-  color: gray;
-  margin-right: 20px;
+
+
+.time{
+  font-size: 25px;
 }
 
 
@@ -29,6 +30,11 @@
   &.hide {
     display: none;
   }
+}
+
+
+.timer-label{
+  width: 150px;
 }
 
 

@@ -35,6 +35,7 @@ export class LichtComponent implements OnInit {
 
     // General
     title = 'Lichtstatus';
+    debug = true;
     powerStatusAllDevices = false;
 
     // Devices from Data

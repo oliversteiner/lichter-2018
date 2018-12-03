@@ -11,7 +11,10 @@ import {faTemperatureFrigid} from '@fortawesome/pro-light-svg-icons';
     styleUrls: ['./sensoren.component.scss']
 })
 export class SensorenComponent implements OnInit {
+
+    // General
     title = 'Sensoren';
+    debug = true;
 
     // Devices from Data
     devices: Device[] = DEVICES;
