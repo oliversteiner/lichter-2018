@@ -8,7 +8,6 @@ import {MqttSandboxComponent} from './mqtt-sandbox/mqtt-sandbox.component';
 import {FormsModule} from '@angular/forms';
 
 import {
-    IMqttMessage,
     MqttModule,
     IMqttServiceOptions
 } from 'ngx-mqtt';
@@ -22,7 +21,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
-    clientId: 'lichter-2018-b',
+    clientId: 'lichter-2018',
     connectTimeout: 5000,
     hostname: '10.0.1.11',
     port: 8083,

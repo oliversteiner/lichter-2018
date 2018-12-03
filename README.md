@@ -1,10 +1,12 @@
 # Lichter 2018
 
-Simple Webapp for Controll the Chrismas Lights from the Schlossgärtnerei.
+Simple webapp to controll my chrismaslights.
 
 Send MQTT Topics via Websockets to EMQX Broker to Sonoff Devices.
 
-IOT Devices are Sonoff TH10 with Tasmota Firmware.
+IoT Devices are Sonoff TH10 with Tasmota Firmware.
+
+Angular 7 - IoT -  MQTT
 
 https://github.com/arendst/Sonoff-Tasmota
 
