@@ -18,7 +18,7 @@ export class ConfigService {
 
 
     setActivePage(pageId) {
-        console.log('setActivePage', pageId);
+        // console.log('setActivePage', pageId);
 
         this.activePage = pageId;
         this._activePage.next(pageId);

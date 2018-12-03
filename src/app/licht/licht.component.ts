@@ -71,7 +71,7 @@ export class LichtComponent implements OnInit {
                 .subscribe((message: IMqttMessage) => {
 
                     // Debug
-                    console.log(device.id + ' Power:', message.payload.toString());
+                    // console.log(device.id + ' Power:', message.payload.toString());
 
                     // Device Online?
                     device.online = true;
@@ -101,7 +101,7 @@ export class LichtComponent implements OnInit {
                 device.subscriptionSensor = this._mqttService.observe('tele/' + device.id + '/SENSOR')
                     .subscribe((message: IMqttMessage) => {
 
-                        console.log(device.id + ' Sensor:', message.payload.toString());
+                        // console.log(device.id + ' Sensor:', message.payload.toString());
                         const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
                         // Set updated data to Device
@@ -115,7 +115,7 @@ export class LichtComponent implements OnInit {
                 device.subscriptionResult = this._mqttService.observe('stat/' + device.id + '/RESULT')
                     .subscribe((message: IMqttMessage) => {
 
-                        console.log(device.id + ' Result:', message.payload.toString());
+                        // console.log(device.id + ' Result:', message.payload.toString());
                         const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
                         // Global Timer Arm

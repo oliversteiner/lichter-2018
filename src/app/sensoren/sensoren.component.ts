@@ -43,7 +43,7 @@ export class SensorenComponent implements OnInit {
                     .subscribe((message: IMqttMessage) => {
 
                         // Debug
-                        console.log(device.id + ' Sensor:', message.payload.toString());
+                        // console.log(device.id + ' Sensor:', message.payload.toString());
 
                         // Device Online?
                         device.online = true;
@@ -83,7 +83,7 @@ export class SensorenComponent implements OnInit {
         for (const device of this.devices) {
 
             if (device.sensor) {
-                console.log('devices', device);
+                // console.log('devices', device);
 
                 this.getSensorData(device);
             }

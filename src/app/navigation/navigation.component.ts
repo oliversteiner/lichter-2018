@@ -30,7 +30,6 @@ export class NavigationComponent implements OnInit {
 
     getActivePage() {
         this.subscription = this.config._activePage.subscribe(pageId => {
-            console.warn('getActivePage', pageId);
             this.activePage = pageId;
         });
     }

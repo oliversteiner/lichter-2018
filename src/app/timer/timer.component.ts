@@ -59,7 +59,7 @@ export class TimerComponent implements OnInit, OnDestroy {
                 .subscribe((message: IMqttMessage) => {
 
                     this.result = message.payload.toString();
-                  //  console.log('result', this.result);
+                  // console.log('result', this.result);
 
                     const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
@@ -94,7 +94,7 @@ export class TimerComponent implements OnInit, OnDestroy {
     }
 
     private checkTimerStatus() {
-        console.log('this.timerStatus', this.timerStatus);
+        // console.log('this.timerStatus', this.timerStatus);
 
         this.timerStatus = 'Timer aus';
 

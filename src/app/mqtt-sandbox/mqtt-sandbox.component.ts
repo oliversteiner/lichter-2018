@@ -39,41 +39,41 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
         // World
         this.subscription_world = this._mqttService.observe('/World').subscribe((message: IMqttMessage) => {
-            console.log('message', message.payload);
+            // console.log('message', message.payload);
             this.message = message.payload.toString();
 
         });
 
         // Power
         this.subscription_power = this._mqttService.observe('stat/sonoff/POWER').subscribe((message: IMqttMessage) => {
-            console.log('power', message.payload);
+            // console.log('power', message.payload);
             this.power = message.payload.toString();
 
         });
 
         // Timer
         this.subscription_timer = this._mqttService.observe('tele/sonoff/Timers').subscribe((message: IMqttMessage) => {
-            console.log('timer1', message.payload);
+            // console.log('timer1', message.payload);
             this.timerStatus = message.payload.toString();
 
         });
 
         // Sensor
         this.subscription_sensor = this._mqttService.observe('tele/sonoff/SENSOR').subscribe((message: IMqttMessage) => {
-            console.log('sensor', message.payload);
+            // console.log('sensor', message.payload);
 
             this.sensor = message.payload.toString();
-            console.log('sensor', this.sensor);
+            // console.log('sensor', this.sensor);
 
 
         });
 
         // Status
         this.subscription_status = this._mqttService.observe('tele/sonoff/STATE').subscribe((message: IMqttMessage) => {
-            console.log('status', message.payload);
+            // console.log('status', message.payload);
 
             this.status = message.payload.toString();
-            console.log('status', this.status);
+            // console.log('status', this.status);
 
 
         });
@@ -81,10 +81,10 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
 
         // Result Response
         this.subscription_result = this._mqttService.observe('stat/sonoff/RESULT').subscribe((message: IMqttMessage) => {
-            console.log('result', message.payload);
+            // console.log('result', message.payload);
 
             this.result = message.payload.toString();
-            console.log('result', this.result);
+            // console.log('result', this.result);
 
             const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
@@ -114,10 +114,10 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
         // Test
         if (this.test_topic !== '') {
             this.subscription_test = this._mqttService.observe(this.test_topic).subscribe((message: IMqttMessage) => {
-                console.log('test', message.payload);
+                // console.log('test', message.payload);
 
                 this.testresult = message.payload.toString();
-                console.log('test', this.testresult);
+                // console.log('test', this.testresult);
 
 
             });
