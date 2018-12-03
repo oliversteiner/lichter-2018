@@ -1,14 +1,17 @@
-
-
-
 <!-- Header -->
-<app-header></app-header>
+<header>
+    <app-navigation></app-navigation>
+
+    <app-header></app-header>
+</header>
 
 <!-- Views -->
-<router-outlet></router-outlet>
+<main>
+    <router-outlet></router-outlet>
+</main>
 
 <!-- Footer -->
-<app-footer></app-footer>
-
-<!-- nav -->
-<app-navigation></app-navigation>
+<footer class="footer">
+    <app-footer></app-footer>
+    <!-- nav -->
+</footer>

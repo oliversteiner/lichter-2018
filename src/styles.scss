@@ -1,7 +1,35 @@
-$color-font-label: #979797;
+@import "colors";
+
+
+* {
+  margin: 0;
+}
 
 html, body {
+
+}
+
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: $color-background;
+  color: white;
+
+}
+
+h1, h2, h3, h4, h5, p, a, div {
   font-family: 'Roboto', sans-serif;
+
+}
+
+a {
+  text-decoration: none;
 }
 
 ul, li {
@@ -9,6 +37,42 @@ ul, li {
 
 }
 
+header {
+  background-color: $color-block;
+
+}
+
+main {
+  padding: 20px;
+}
+
+
+footer {
+  background-color: $color-block;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+
+}
+
+.footer {
+
+}
+
+.header {
+  display: none;
+  text-align: center;
+  margin-top: 20px;
+
+  h1 {
+    font-weight: lighter;
+    font-size: 15px;
+  }
+}
 
 .offline {
   opacity: 0.3;
@@ -18,7 +82,6 @@ ul, li {
   display: inline-block;
   width: 76px;
   height: 76px;
-  background-color: gray;
 
   img {
     width: 100%;
@@ -51,34 +114,6 @@ ul, li {
   text-align: center;
   width: 100%;
   margin: 20px;
-}
-
-
-.header,
-.main,
-.footer,
-.debug {
-  min-height: 50px;
-}
-
-
-.header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  text-align: center;
-  //  background-color: antiquewhite;
-}
-
-.main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  // background-color: #cbfaf2;
-}
-
-.footer {
-  // background-color: #c7d6fa;
 }
 
 
@@ -119,6 +154,3 @@ ul, li {
 }
 
 
-a{
-  text-decoration: none;
-}

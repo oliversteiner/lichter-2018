@@ -1,32 +1,29 @@
-<ul>
+<div class="navigation">
+    <nav>
 
-    <!-- Licht -->
-    <li>
-        <a class="nav-tap" routerLink="/licht" [class.active]="activePage === 'licht'" >
+        <!-- Licht -->
+        <a class="nav-tap" routerLink="/licht" [class.active]="activePage === 'licht'">
             <div class="nav-tab-icon">
                 <fa-icon [icon]="licht"></fa-icon>
             </div>
             <div class="nav-tab-name">Licht</div>
         </a>
-    </li>
 
-    <!-- Timer -->
-    <li>
-        <a class="nav-tap" routerLink="/timer" [class.active]="activePage === 'timer'" >
+        <!-- Timer -->
+        <a class="nav-tap" routerLink="/timer" [class.active]="activePage === 'timer'">
             <div class="nav-tab-icon">
                 <fa-icon [icon]="timer"></fa-icon>
             </div>
             <div class="nav-tab-name">Timers</div>
         </a>
-    </li>
 
-    <!-- Sensoren -->
-    <li>
-        <a class="nav-tap" routerLink="/sensoren" [class.active]="activePage === 'sensoren'" >
+        <!-- Sensoren -->
+        <a class="nav-tap" routerLink="/sensoren" [class.active]="activePage === 'sensoren'">
             <div class="nav-tab-icon">
                 <fa-icon [icon]="sensoren"></fa-icon>
             </div>
             <div class="nav-tab-name">Sensoren</div>
         </a>
-    </li>
-</ul>
+
+    </nav>
+</div>

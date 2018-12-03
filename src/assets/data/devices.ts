@@ -6,7 +6,7 @@ export const DEVICES: Device[] =
         {
             name: 'Test',
             place: 'Wohnzimmer Oli',
-            timer: true,
+            timer: false,
             power: false,
             online: false,
             sensor: true,
@@ -29,8 +29,8 @@ export const DEVICES: Device[] =
 
         {
             name: 'Stern Strasse',
-            timer: true,
-            power: true,
+            timer: false,
+            power: false,
             online: false,
             sensor: false,
             temperature: 0,
@@ -42,7 +42,7 @@ export const DEVICES: Device[] =
         {
             name: 'Pergula',
             timer: false,
-            power: true,
+            power: false,
             online: false,
             sensor: true,
             temperature: 0,
@@ -54,7 +54,7 @@ export const DEVICES: Device[] =
         {
             name: 'Gästezimmer',
             timer: false,
-            power: true,
+            power: false,
             online: false,
             sensor: false,
             group: 'sonoffs',
@@ -64,7 +64,7 @@ export const DEVICES: Device[] =
         {
             name: 'Terasse',
             timer: false,
-            power: true,
+            power: false,
             online: false,
             sensor: false,
             group: 'sonoffs',
