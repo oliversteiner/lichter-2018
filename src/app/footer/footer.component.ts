@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {appVersion} from '../app.version';
+import {ConfigService} from '../_services/config.service';
 
 @Component({
     selector: 'app-footer',
@@ -9,8 +10,10 @@ import {appVersion} from '../app.version';
 export class FooterComponent implements OnInit {
 
     appVersion = appVersion;
+    private debug: boolean;
 
-    constructor() {
+    constructor(private config: ConfigService) {
+        this.debug = this.config.debug;
     }
 
     ngOnInit() {
