@@ -1,37 +1,57 @@
+<!-- Header -->
+<div class="header">
 
-<div class="header-icon">
-    <div (click)="getAllData()">
-        <!-- Timer ON -->
-        <div class="icon">
-            <img src="../../assets/images/icon/sensor/sensor.svg" alt="">
-        </div>
-    </div>
-</div>
-
-<ul>
-    <li *ngFor="let device of  devices ">
-
-        <div *ngIf="device.sensor" [class.offline]="!device.online" class="sensor-container">
-
-
-            <h2 *ngIf="device.place">{{device.place}}</h2>
-            <h2 *ngIf="!device.place">{{device.name}}</h2>
-
-            <div class="row">
-                <!-- Temperature -->
-                <div class="col temp">
-                    <span class="value">{{device.temperature}}</span>
-                    <span class="unit">°C</span>
-                </div>
-
-                <!-- Humidity -->
-                <div class="col humi">
-                    <span class="value">{{device.humidity}}</span>
-                    <span class="unit">%</span>
-                </div>
-
+    <div class="header-icon">
+        <div (click)="getAllData()">
+            <!-- Timer ON -->
+            <div class="icon">
+                <img src="../../assets/images/icon/sensor/sensor.svg" alt="">
             </div>
         </div>
+    </div>
 
-    </li>
-</ul>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <ul>
+        <li *ngFor="let device of  devices ">
+
+            <div *ngIf="device.sensor" [class.offline]="!device.online" class="sensor-container">
+
+
+                <h2 *ngIf="device.place">{{device.place}}</h2>
+                <h2 *ngIf="!device.place">{{device.name}}</h2>
+
+                <div class="row">
+                    <!-- Temperature -->
+                    <div class="col temp">
+                        <span class="value">{{device.temperature}}</span>
+                        <span class="unit">°C</span>
+                    </div>
+
+                    <!-- Humidity -->
+                    <div class="col humi">
+                        <span class="value">{{device.humidity}}</span>
+                        <span class="unit">%</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </li>
+    </ul>
+
+
+</div>
+
+
+<!-- Debug -->
+<div class="debug"></div>
+
+<!-- Footer -->
+<div class="footer"></div>
+
+
+

@@ -1,29 +1,33 @@
-<h1>{{title}}</h1>
+<!-- Header -->
+<div class="header">
+    <div class="header-icon">
 
-<div class="header-icon">
-
-    <div (click)="togglePowerAll()">
-        <div *ngIf="!powerStatusAllDevices">
-            <div class="icon">
-                <img src="../../assets/images/icon/power/lightbulb-off.svg" alt="">
+        <div (click)="togglePowerAll()">
+            <div *ngIf="!powerStatusAllDevices">
+                <div class="icon">
+                    <img src="../../assets/images/icon/power/lightbulb-off.svg" alt="">
+                </div>
             </div>
-        </div>
 
-        <div *ngIf="powerStatusAllDevices">
-            <div class="icon">
-                <img src="../../assets/images/icon/power/lightbulb-on.svg" alt="">
+            <div *ngIf="powerStatusAllDevices">
+                <div class="icon">
+                    <img src="../../assets/images/icon/power/lightbulb-on.svg" alt="">
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<ul class="devices-list">
-    <li class="devices-list-item" *ngFor="let device of devices">
-        <div class="item-container" [class.offline]="!device.online">
-            <!-- timer -->
-            <span class="item-timer"
 
-                  (click)="toggleTimer(device)">
+<!-- Main -->
+<div class="main">
+    <ul class="devices-list">
+        <li class="devices-list-item" *ngFor="let device of devices">
+            <div class="item-container" [class.offline]="!device.online">
+                <!-- timer -->
+                <span class="item-timer"
+
+                      (click)="toggleTimer(device)">
 
                  <!-- Timer ON -->
                 <div *ngIf="device.timer === true">
@@ -32,7 +36,7 @@
                     </div>
                 </div>
 
-                <!-- Timer Off -->
+                    <!-- Timer Off -->
                 <div *ngIf="device.timer === false">
                     <div class="icon">
                         <img src="../../assets/images/icon/timer/clock-off.svg" alt="">
@@ -41,11 +45,11 @@
 
             </span>
 
-            <!-- power -->
-            <span class="item-power"
+                <!-- power -->
+                <span class="item-power"
 
 
-                  (click)="togglePower(device)">
+                      (click)="togglePower(device)">
 
                 <!-- Power ON -->
                 <div *ngIf="device.power === true">
@@ -54,7 +58,7 @@
                     </div>
                 </div>
 
-                <!-- Power Off -->
+                    <!-- Power Off -->
                 <div *ngIf="device.power === false">
                     <div class="icon">
                         <img src="../../assets/images/icon/power/lightbulb-off.svg" alt="">
@@ -63,42 +67,50 @@
 
             </span>
 
-            <!-- name -->
-            <span class="item-name">
-            {{device.name}}
-        </span>
+                <!-- name -->
+                <span class="item-name">
+                    {{device.name}}
+                </span>
 
-            <!-- sensor -->
-            <span *ngIf="device.sensor" class="item-sensor"
-
-                  (click)="toggleDetails(device)">
-               <fa-icon [icon]="iconSensor"></fa-icon>
-
-        </span>
-        </div>
-
-
-        <!-- sensors -->
-        <div *ngIf="device.sensor"
-             [@openClose]="device.sensorDetails ? 'open' : 'closed'"
-             class="container-sensor"
-        >
-            <!-- temperature-->
-            <div class="item-temperature">
-                {{device.temperature}}
+                <!-- sensor -->
+                <span *ngIf="device.sensor" class="item-sensor"
+                      (click)="toggleDetails(device)">
+                        <fa-icon [icon]="iconSensor"></fa-icon>
+                </span>
             </div>
 
-            <!-- humidity -->
-            <div class="item-humidity">
-                {{device.humidity}}
+
+            <!-- sensors -->
+            <div *ngIf="device.sensor"
+                 [@openClose]="device.sensorDetails ? 'open' : 'closed'"
+                 class="container-sensor">
+
+                <!-- temperature-->
+                <div class="item-temperature">
+                    {{device.temperature}}
+                </div>
+
+                <!-- humidity -->
+                <div class="item-humidity">
+                    {{device.humidity}}
+                </div>
+
             </div>
+        </li>
+    </ul>
 
-        </div>
-    </li>
-</ul>
-
-
-<div>
-    <div>{{power}}</div>
-    <div>{{sensor}}</div>
 </div>
+
+<!-- Debug -->
+<div class="debug">
+    <div>
+        <div>{{power}}</div>
+        <div>{{sensor}}</div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+
+</div>
+

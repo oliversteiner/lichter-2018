@@ -1,16 +1,7 @@
-.header {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 50px;
-  text-align: center;
-}
+
 
 .main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 50px;
+
 }
 
 .row {
@@ -41,25 +32,3 @@
 }
 
 
-// DEBUG
-// ====================
-
-.debug {
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid silver;
-
-  h5 {
-    color: gray;
-    text-align: center;
-    margin: 0 0 10px 0;
-    padding: 0;
-  }
-}
-
-.debug-table {
-  th {
-    text-align: left;
-    padding-right: 20px;
-  }
-}

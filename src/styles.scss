@@ -7,6 +7,11 @@ ul, li {
 
 }
 
+
+.offline {
+  opacity: 0.3;
+}
+
 .icon {
   display: inline-block;
   width: 50px;
@@ -24,4 +29,68 @@ ul, li {
   display: flex;
   justify-content: center;
   text-align: center;
+}
+
+
+.header,
+.main,
+.footer,
+.debug {
+  min-height: 50px;
+}
+
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  background-color: antiquewhite;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  background-color: #cbfaf2;
+}
+
+.footer {
+  background-color: #c7d6fa;
+}
+
+.debug {
+  background-color: #fabac9;
+}
+
+
+// DEBUG
+// ====================
+
+.debug {
+  display: flex;
+  justify-content: space-around;
+
+
+  h5 {
+    color: gray;
+    text-align: center;
+    margin: 0 0 10px 0;
+    padding: 0;
+  }
+}
+
+.debug-item {
+  border: 1px solid silver;
+  padding: 10px;
+  margin: 20px;
+
+}
+
+.debug-table {
+  th {
+    text-align: left;
+    padding-right: 20px;
+  }
 }

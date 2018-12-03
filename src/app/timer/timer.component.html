@@ -1,26 +1,29 @@
-<h1>{{title}}</h1>
+<!-- Header -->
+<div class="header">
 
-<div class="header-icon">
-    <div (click)="toggleTimer()">
+    <div class="header-icon">
+        <div (click)="toggleTimer()">
 
-        <!-- Timer ON -->
-        <div *ngIf="globalTimerArm === 1">
-            <div class="icon">
-                <img src="../../assets/images/icon/timer/clock-on.svg" alt="">
+            <!-- Timer ON -->
+            <div *ngIf="globalTimerArm === 1">
+                <div class="icon">
+                    <img src="../../assets/images/icon/timer/clock-on.svg" alt="">
+                </div>
             </div>
-        </div>
 
-        <!-- Timer Off -->
-        <div *ngIf="globalTimerArm === 0">
-            <div class="icon">
-                <img src="../../assets/images/icon/timer/clock-off.svg" alt="">
+            <!-- Timer Off -->
+            <div *ngIf="globalTimerArm === 0">
+                <div class="icon">
+                    <img src="../../assets/images/icon/timer/clock-off.svg" alt="">
+                </div>
             </div>
-        </div>
 
-        <p class="timer-status">{{timerStatus}}</p>
+            <p class="timer-status">{{timerStatus}}</p>
+        </div>
     </div>
 </div>
 
+<!-- Main -->
 <div class="main">
 
     <div>
@@ -60,100 +63,107 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="debug">
+<!-- Debug -->
+<div class="debug">
 
-        <h5>Timer JSON ON</h5>
+    <div class="row">
+        <div class="debug-item">
 
-        <table class="debug-table">
-            <tr>
-                <th>Arm</th>
-                <td>{{sonoffTimers[0].Arm}}</td>
-            </tr>
+            <h5>Timer JSON ON</h5>
 
-            <tr>
-                <th>Mode</th>
-                <td>{{sonoffTimers[0].Mode}}</td>
-            </tr>
+            <table class="debug-table">
+                <tr>
+                    <th>Arm</th>
+                    <td>{{sonoffTimers[0].Arm}}</td>
+                </tr>
 
-            <tr>
-                <th>Time</th>
-                <td>{{sonoffTimers[0].Time}}</td>
-            </tr>
+                <tr>
+                    <th>Mode</th>
+                    <td>{{sonoffTimers[0].Mode}}</td>
+                </tr>
 
-            <tr>
-                <th>Window</th>
-                <td>{{sonoffTimers[0].Window}}</td>
-            </tr>
+                <tr>
+                    <th>Time</th>
+                    <td>{{sonoffTimers[0].Time}}</td>
+                </tr>
 
-            <tr>
-                <th>Days</th>
-                <td>{{sonoffTimers[0].Days}}</td>
-            </tr>
+                <tr>
+                    <th>Window</th>
+                    <td>{{sonoffTimers[0].Window}}</td>
+                </tr>
 
-            <tr>
-                <th>Repeat</th>
-                <td>{{sonoffTimers[0].Repeat}}</td>
-            </tr>
+                <tr>
+                    <th>Days</th>
+                    <td>{{sonoffTimers[0].Days}}</td>
+                </tr>
 
-            <tr>
-                <th>Output</th>
-                <td>{{sonoffTimers[0].Output}}</td>
+                <tr>
+                    <th>Repeat</th>
+                    <td>{{sonoffTimers[0].Repeat}}</td>
+                </tr>
 
-            </tr>
-            <tr>
-                <th>Action</th>
-                <td>{{sonoffTimers[0].Action}}</td>
-            </tr>
-        </table>
+                <tr>
+                    <th>Output</th>
+                    <td>{{sonoffTimers[0].Output}}</td>
 
-    </div>
+                </tr>
+                <tr>
+                    <th>Action</th>
+                    <td>{{sonoffTimers[0].Action}}</td>
+                </tr>
+            </table>
 
-    <div class="debug">
+        </div>
 
-        <h5>Timer JSON Off</h5>
+        <div class="debug-item">
 
-        <table class="debug-table">
-            <tr>
-                <th>Arm</th>
-                <td>{{sonoffTimers[1].Arm}}</td>
-            </tr>
+            <h5>Timer JSON Off</h5>
 
-            <tr>
-                <th>Mode</th>
-                <td>{{sonoffTimers[1].Mode}}</td>
-            </tr>
+            <table class="debug-table">
+                <tr>
+                    <th>Arm</th>
+                    <td>{{sonoffTimers[1].Arm}}</td>
+                </tr>
 
-            <tr>
-                <th>Time</th>
-                <td>{{sonoffTimers[1].Time}}</td>
-            </tr>
+                <tr>
+                    <th>Mode</th>
+                    <td>{{sonoffTimers[1].Mode}}</td>
+                </tr>
 
-            <tr>
-                <th>Window</th>
-                <td>{{sonoffTimers[1].Window}}</td>
-            </tr>
+                <tr>
+                    <th>Time</th>
+                    <td>{{sonoffTimers[1].Time}}</td>
+                </tr>
 
-            <tr>
-                <th>Days</th>
-                <td>{{sonoffTimers[1].Days}}</td>
-            </tr>
+                <tr>
+                    <th>Window</th>
+                    <td>{{sonoffTimers[1].Window}}</td>
+                </tr>
 
-            <tr>
-                <th>Repeat</th>
-                <td>{{sonoffTimers[1].Repeat}}</td>
-            </tr>
+                <tr>
+                    <th>Days</th>
+                    <td>{{sonoffTimers[1].Days}}</td>
+                </tr>
 
-            <tr>
-                <th>Output</th>
-                <td>{{sonoffTimers[1].Output}}</td>
+                <tr>
+                    <th>Repeat</th>
+                    <td>{{sonoffTimers[1].Repeat}}</td>
+                </tr>
 
-            </tr>
-            <tr>
-                <th>Action</th>
-                <td>{{sonoffTimers[1].Action}}</td>
-            </tr>
-        </table>
+                <tr>
+                    <th>Output</th>
+                    <td>{{sonoffTimers[1].Output}}</td>
 
+                </tr>
+                <tr>
+                    <th>Action</th>
+                    <td>{{sonoffTimers[1].Action}}</td>
+                </tr>
+            </table>
+
+        </div>
     </div>
 </div>
+
+<!-- Footer -->
+<div class="footer"></div>
