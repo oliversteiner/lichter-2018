@@ -1,7 +1,14 @@
 <!-- Header -->
 <div class="header">
 
-    <div class="header-icon">
+<h1>{{title}}</h1>
+
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <div class="main-icon">
         <div (click)="getAllData()">
             <!-- Timer ON -->
             <div class="icon">
@@ -9,11 +16,6 @@
             </div>
         </div>
     </div>
-
-</div>
-
-<!-- Main -->
-<div class="main">
 
     <ul>
         <li *ngFor="let device of  devices ">

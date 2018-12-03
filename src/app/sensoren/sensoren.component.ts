@@ -4,6 +4,7 @@ import {DEVICES} from '../../assets/data/devices';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {MqttResponse} from '../_models/mqttResponse';
 import {faTemperatureFrigid} from '@fortawesome/pro-light-svg-icons';
+import {ConfigService} from '../_services/config.service';
 
 @Component({
     selector: 'app-sensoren',
@@ -14,7 +15,8 @@ export class SensorenComponent implements OnInit {
 
     // General
     title = 'Sensoren';
-    debug = true;
+    id = 'sensoren';
+    debug = false;
 
     // Devices from Data
     devices: Device[] = DEVICES;
@@ -22,7 +24,13 @@ export class SensorenComponent implements OnInit {
     // Icons
     iconSensor = faTemperatureFrigid;
 
-    constructor(private _mqttService: MqttService) {
+    constructor(private _mqttService: MqttService, private _config: ConfigService) {
+
+        // Debug
+        this.debug = this._config.debug;
+
+        // Navigation
+        this._config.setActivePage(this.id);
 
         for (const device of this.devices) {
 
@@ -52,6 +60,9 @@ export class SensorenComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        // Navigation
+        this._config.setActivePage(this.id);
     }
 
     public getSensorData(device): void {

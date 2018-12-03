@@ -1,6 +1,13 @@
 <!-- Header -->
 <div class="header">
-    <div class="header-icon">
+    <h1>{{title}}</h1>
+</div>
+
+
+<!-- Main -->
+<div class="main">
+
+    <div class="main-icon">
 
         <div (click)="togglePowerAll()">
             <div *ngIf="!powerStatusAllDevices">
@@ -16,56 +23,53 @@
             </div>
         </div>
     </div>
-</div>
 
 
-<!-- Main -->
-<div class="main">
     <ul class="devices-list">
         <li class="devices-list-item" *ngFor="let device of devices">
             <div class="item-container" [class.offline]="!device.online">
                 <!-- timer -->
                 <div class="item-timer"
 
-                      (click)="toggleTimer(device)">
+                     (click)="toggleTimer(device)">
 
-                 <!-- Timer ON -->
-                <div *ngIf="device.timer === true">
-                    <div class="icon small">
-                        <img src="../../assets/images/icon/timer/clock-on.svg" alt="">
+                    <!-- Timer ON -->
+                    <div *ngIf="device.timer === true">
+                        <div class="icon small">
+                            <img src="../../assets/images/icon/timer/clock-on.svg" alt="">
+                        </div>
                     </div>
-                </div>
 
                     <!-- Timer Off -->
-                <div *ngIf="device.timer === false">
-                    <div class="icon small">
-                        <img src="../../assets/images/icon/timer/clock-off.svg" alt="">
+                    <div *ngIf="device.timer === false">
+                        <div class="icon small">
+                            <img src="../../assets/images/icon/timer/clock-off.svg" alt="">
+                        </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
 
                 <!-- power -->
                 <div class="item-power"
 
 
-                      (click)="togglePower(device)">
+                     (click)="togglePower(device)">
 
-                <!-- Power ON -->
-                <div *ngIf="device.power === true">
-                    <div class="icon medium">
-                        <img src="../../assets/images/icon/power/lightbulb-on.svg" alt="">
+                    <!-- Power ON -->
+                    <div *ngIf="device.power === true">
+                        <div class="icon medium">
+                            <img src="../../assets/images/icon/power/lightbulb-on.svg" alt="">
+                        </div>
                     </div>
-                </div>
 
                     <!-- Power Off -->
-                <div *ngIf="device.power === false">
-                    <div class="icon medium">
-                        <img src="../../assets/images/icon/power/lightbulb-off.svg" alt="">
+                    <div *ngIf="device.power === false">
+                        <div class="icon medium">
+                            <img src="../../assets/images/icon/power/lightbulb-off.svg" alt="">
+                        </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
 
                 <!-- name -->
                 <div class="item-name">
@@ -74,7 +78,7 @@
 
                 <!-- sensor -->
                 <div *ngIf="device.sensor" class="item-sensor"
-                      (click)="toggleDetails(device)">
+                     (click)="toggleDetails(device)">
                     <div class="icon small">
                         <img src="../../assets/images/icon/sensor/sensor.svg" alt="">
                     </div>
@@ -85,7 +89,7 @@
             <!-- sensors -->
             <div class="container-sensor" *ngIf="device.sensor"
                  [@openClose]="device.sensorDetails ? 'open' : 'closed'"
-                 >
+            >
 
                 <div class="row">
                     <!-- Temperature -->

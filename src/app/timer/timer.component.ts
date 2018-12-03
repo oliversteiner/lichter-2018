@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs';
 import {MqttResponse} from '../_models/mqttResponse';
 import {Device} from '../_models/devices';
 import {DEVICES} from '../../assets/data/devices';
+import {ConfigService} from '../_services/config.service';
 
 @Component({
     selector: 'app-timer',
@@ -15,6 +16,7 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     // General
     private title = 'Timer';
+    private id = 'timer';
     private debug = false;
 
 
@@ -33,8 +35,15 @@ export class TimerComponent implements OnInit, OnDestroy {
     // Devices from Data
     private devices: Device[] = DEVICES;
 
-    constructor(private _mqttService: MqttService) {
+    constructor(private _mqttService: MqttService, private _config: ConfigService) {
 
+        // Debug
+        this.debug = this._config.debug;
+
+        // Navigation
+        this._config.setActivePage(this.id);
+
+        // Devices
         this.sonoffTimers = [];
 
         this.sonoffTimers[0] = new SonoffTimer();
@@ -50,7 +59,7 @@ export class TimerComponent implements OnInit, OnDestroy {
                 .subscribe((message: IMqttMessage) => {
 
                     this.result = message.payload.toString();
-                    console.log('result', this.result);
+                  //  console.log('result', this.result);
 
                     const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
@@ -99,10 +108,14 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
+        // Navigation
+        this._config.setActivePage(this.id);
+
     }
 
     toggleTimer() {
 
+        this._config.setActivePage(this.id);
 
         let message = '0';
         const topic = 'cmnd/sonoffs/Timers';

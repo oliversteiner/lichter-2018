@@ -5,6 +5,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {MqttResponse} from '../_models/mqttResponse';
 import {faTemperatureFrigid, faClock, faLightbulb, faLightbulbOn} from '@fortawesome/pro-light-svg-icons';
+import {ConfigService} from '../_services/config.service';
 
 @Component({
     selector: 'app-licht',
@@ -34,26 +35,26 @@ import {faTemperatureFrigid, faClock, faLightbulb, faLightbulbOn} from '@fortawe
 export class LichtComponent implements OnInit {
 
     // General
-    title = 'Lichtstatus';
-    debug = true;
-    powerStatusAllDevices = false;
+    public title = 'Lichter';
+    public id = 'licht';
+    public debug = true;
+    public powerStatusAllDevices = false;
 
     // Devices from Data
-    devices: Device[] = DEVICES;
-
-    // Icons
-    iconSensor = faTemperatureFrigid;
-    iconTimer = faClock;
-    iconPowerOff = faLightbulb;
-    iconPowerOn = faLightbulbOn;
+    public devices: Device[] = DEVICES;
 
 
 // MQTT
     public power: string;
     public sensor: string;
 
-    constructor(private _mqttService: MqttService) {
+    constructor(private _mqttService: MqttService, private _config: ConfigService) {
 
+        // Debug
+        this.debug = this._config.debug;
+
+        // Navigation
+        this._config.setActivePage(this.id);
 
         // set Status of sensorDetails to 'closed'
         for (const device of this.devices) {
@@ -137,6 +138,10 @@ export class LichtComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        // Navigation
+        this._config.setActivePage(this.id);
+
     }
 
     toggleTimer(device: Device): void {
