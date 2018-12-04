@@ -23,11 +23,11 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     clientId: 'lichter-2018',
     connectTimeout: 5000,
-    hostname: '10.0.1.11',
+    hostname: 'iot-server.local',
     port: 8083,
     path: '/mqtt',
-    username: 'test',
-    password: 'test'
+    username: 'schlossnet',
+    password: 'schloss#28975-IUZ'
 };
 
 
