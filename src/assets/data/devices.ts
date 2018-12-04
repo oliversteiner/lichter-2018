@@ -3,18 +3,7 @@ import {Device} from '../../app/_models/devices';
 
 export const DEVICES: Device[] =
     [
-        {
-            name: 'Test',
-            place: 'Wohnzimmer Oli',
-            timer: false,
-            power: false,
-            online: false,
-            sensor: true,
-            temperature: 0,
-            humidity: 0,
-            group: 'sonoffs',
-            id: 'sonoff'
-        },
+
         {
             name: 'Stern und Laube',
             timer: true,
@@ -32,7 +21,7 @@ export const DEVICES: Device[] =
             timer: false,
             power: false,
             online: false,
-            sensor: false,
+            sensor: true,
             temperature: 0,
             humidity: 0,
             group: 'sonoffs',
@@ -62,12 +51,24 @@ export const DEVICES: Device[] =
         },
 
         {
-            name: 'Terasse',
+            name: 'Terrasse',
             timer: false,
             power: false,
             online: false,
             sensor: false,
             group: 'sonoffs',
-            id: 'sonoff-terasse'
-        }
+            id: 'sonoff-terrasse'
+        },
+        {
+            name: 'Test',
+            place: 'Wohnzimmer Oli',
+            timer: false,
+            power: false,
+            online: false,
+            sensor: true,
+            temperature: 0,
+            humidity: 0,
+            group: 'sonoffs',
+            id: 'sonoff'
+        },
     ];
