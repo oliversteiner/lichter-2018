@@ -3,7 +3,6 @@ import {Device} from '../_models/devices';
 import {DEVICES} from '../../assets/data/devices';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {MqttResponse} from '../_models/mqttResponse';
-import {faTemperatureFrigid} from '@fortawesome/pro-light-svg-icons';
 import {ConfigService} from '../_services/config.service';
 
 @Component({
@@ -18,20 +17,21 @@ export class SensorenComponent implements OnInit {
     id = 'sensoren';
     debug = false;
 
-    // Devices from Data
+    // Get List of Devices from /assets/data/devices
     devices: Device[] = DEVICES;
 
-    // Icons
-    iconSensor = faTemperatureFrigid;
 
     constructor(private _mqttService: MqttService, private _config: ConfigService) {
 
-        // Debug
+        // Debug Modus
         this.debug = this._config.debug;
 
-        // Navigation
+        // Set navigation-tabs to "Sensoren"
         this._config.setActivePage(this.id);
 
+        // Loop all Devices
+        // -- Search for Sensors
+        // ---- Update Sensor-Data
         for (const device of this.devices) {
 
             // Subscriptions
@@ -43,18 +43,35 @@ export class SensorenComponent implements OnInit {
                     .subscribe((message: IMqttMessage) => {
 
                         // Debug
-                        // console.log(device.id + ' Sensor:', message.payload.toString());
+                        console.log(device.id + ' Sensor:', message.payload.toString());
 
                         // Device Online?
                         device.online = true;
 
                         const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
-                        // Set updated data to Device
-                        device.temperature = mqttResponse.AM2301.Temperature;
-                        device.humidity = mqttResponse.AM2301.Humidity;
+                        // witch Sensor?
+                        // Sensor is AM2301
+                        if (mqttResponse.AM2301) {
+
+                            // Set temperature
+                            device.temperature = mqttResponse.AM2301.Temperature;
+
+                            // Set humidity
+                            device.humidity = mqttResponse.AM2301.Humidity;
+                        }
+
+                        // Sensor is DS18B20
+                        if (mqttResponse.DS18B20) {
+
+                            // Set temperature
+                            device.temperature = mqttResponse.DS18B20.Temperature;
+                        }
+
                     });
             }
+
+            // Force Device to send Data
             this.getSensorData(device);
         }
     }
@@ -83,7 +100,7 @@ export class SensorenComponent implements OnInit {
         for (const device of this.devices) {
 
             if (device.sensor) {
-                // console.log('devices', device);
+                console.log('devices', device);
 
                 this.getSensorData(device);
             }

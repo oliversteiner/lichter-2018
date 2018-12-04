@@ -104,10 +104,31 @@ export class LichtComponent implements OnInit {
                         // console.log(device.id + ' Sensor:', message.payload.toString());
                         const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
-                        // Set updated data to Device
-                        device.temperature = mqttResponse.AM2301.Temperature;
-                        device.humidity = mqttResponse.AM2301.Humidity;
+                        // witch Sensor?
+                        // Sensor is AM2301
+                        if (mqttResponse.AM2301) {
+
+                            // Set temperature
+                            device.temperature = mqttResponse.AM2301.Temperature;
+
+                            // Set humidity
+                            device.humidity = mqttResponse.AM2301.Humidity;
+                        }
+
+                        // Sensor is DS18B20
+                        if (mqttResponse.DS18B20) {
+
+                            // Set temperature
+                            device.temperature = mqttResponse.DS18B20.Temperature;
+                        }
+
+
+
+
                     });
+
+
+
             }
 
             // Subscription Result

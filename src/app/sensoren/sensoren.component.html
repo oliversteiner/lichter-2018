@@ -1,7 +1,7 @@
 <!-- Header -->
 <div class="header">
 
-<h1>{{title}}</h1>
+    <h1>{{title}}</h1>
 
 </div>
 
@@ -24,17 +24,18 @@
 
                 <!-- Label -->
                 <h2 class="label" *ngIf="device.place">{{device.place}}</h2>
-                <h2 class="label"  *ngIf="!device.place">{{device.name}}</h2>
+                <h2 class="label" *ngIf="!device.place">{{device.name}}</h2>
 
                 <div class="row">
+
                     <!-- Temperature -->
-                    <div class="col temp">
+                    <div *ngIf="device.temperature" class="col temp">
                         <span class="value">{{device.temperature}}</span>
                         <span class="unit">°C</span>
                     </div>
 
                     <!-- Humidity -->
-                    <div class="col humi">
+                    <div *ngIf="device.humidity" class="col humi">
                         <span class="value">{{device.humidity}}</span>
                         <span class="unit">%</span>
                     </div>
