@@ -19,8 +19,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 
 
-## Timers
 
+## TODO
 
-Global Timers on:
-`Timers 1`
+[ ] Refactor MQTT-Commands as Service
+[ ] Timer Settings as Timeline with Sunrise
