@@ -1,19 +1,28 @@
+@import "../../colors";
+
 .row {
   display: flex;
-justify-content: space-around;
+  justify-content: space-around;
 }
 
 .col {
+  display: flex;
   margin-right: 20px;
 }
 
 .sensor-container {
-  border: 1px solid silver;
-  margin: 20px;
+  border: 1px solid $color-border;
+  margin: 20px 20px 60px 20px;
   padding: 20px;
 
   h2 {
+    display: inline-block;
     margin: 0 0 20px 0;
+    text-align: left;
+    background-color: $color-background;
+    padding: 0 10px;
+    font-weight: lighter;
+
   }
 }
 
@@ -29,16 +38,15 @@ li {
   list-style: none;
 }
 
-.value{
-  font-size: 35px;
-  margin-right: 2px;
-  font-weight: bold;
+.sensor-value {
+
 }
 
-.unit{
-  margin-top: 5px;
+.sensor-unit {
+
 }
 
-.col{
-display: flex;
+.border-label {
+  //  display: inline-block;
+  margin-top: -35px;
 }

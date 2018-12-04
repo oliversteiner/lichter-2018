@@ -94,14 +94,14 @@
                 <div class="row">
                     <!-- Temperature -->
                     <div *ngIf="device.temperature" class="col temp">
-                        <span class="value">{{device.temperature}}</span>
-                        <span class="unit">°C</span>
+                        <span class="sensor-value">{{device.temperature}}</span>
+                        <span class="sensor-unit">°C</span>
                     </div>
 
                     <!-- Humidity -->
                     <div *ngIf="device.humidity" class="col humi">
-                        <span class="value">{{device.humidity}}</span>
-                        <span class="unit">%</span>
+                        <span class="sensor-value">{{device.humidity}}</span>
+                        <span class="sensor-unit">%</span>
                     </div>
                 </div>
 

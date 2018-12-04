@@ -103,7 +103,7 @@ footer {
 
 .label {
   font-size: 20px;
-  color: $color-font-label;
+  color: $color-label;
   text-align: center;
   font-weight: 300;
 }
@@ -153,4 +153,17 @@ footer {
   display: flex;
 }
 
+// SENSORS
+// ====================
 
+.sensor-value {
+  font-size: 25px;
+  margin-right: 2px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+
+.sensor-unit {
+  margin-top: 2px;
+  color: $color-label;
+}

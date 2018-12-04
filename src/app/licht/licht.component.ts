@@ -15,7 +15,7 @@ import {ConfigService} from '../_services/config.service';
         trigger('openClose', [
             // ...
             state('open', style({
-                height: '50px',
+                height: '80px',
                 opacity: 1,
             })),
             state('closed', style({

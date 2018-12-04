@@ -1,3 +1,4 @@
+@import "../../colors";
 
 .on {
   background-color: #00e046;
@@ -19,7 +20,7 @@
 
 .devices-list-item {
   list-style: none;
-  border-bottom: 1px solid silver;
+  border-bottom: 1px solid $color-border;
   margin: 0;
   padding: 0;
 }
@@ -62,15 +63,7 @@
 }
 
 
-.item-humidity,
-.item-temperature {
-  display: inline-block;
-  padding: 10px;
-  margin: 10px;
-}
-
-
-.item-container{
+.item-container {
   display: flex;
   align-items: center;
   margin: 0;
@@ -78,23 +71,27 @@
 }
 
 
-.row{
+.row {
   display: flex;
   justify-content: space-around;
-  padding: 10px;
+  padding: 20px 0 10px 0;
 }
 
-.value{
-  font-size: 20px;
-  margin-right: 5px;
-  font-weight: bold;
-}
-
-.unit{
-}
-
-.col{
+.col {
   display: flex;
   align-items: center;
 
 }
+
+
+// Sensors
+// ====================
+
+.sensor-value {
+font-size: 25px;
+}
+
+.sensor-unit {
+  margin-top: 0;
+}
+
