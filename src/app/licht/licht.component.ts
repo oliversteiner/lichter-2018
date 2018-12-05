@@ -4,8 +4,8 @@ import {DEVICES} from '../../assets/data/devices';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {MqttResponse} from '../_models/mqttResponse';
-import {faTemperatureFrigid, faClock, faLightbulb, faLightbulbOn} from '@fortawesome/pro-light-svg-icons';
 import {ConfigService} from '../_services/config.service';
+import {SonoffTimer} from '../_models/sonoffTimer';
 
 @Component({
     selector: 'app-licht',
@@ -49,6 +49,8 @@ export class LichtComponent implements OnInit {
 // MQTT
     public power: string;
     public sensor: string;
+    private timerOn: SonoffTimer;
+    private timerOff: SonoffTimer;
 
     constructor(private _mqttService: MqttService, private _config: ConfigService) {
 
@@ -57,6 +59,8 @@ export class LichtComponent implements OnInit {
 
         // Navigation
         this._config.setActivePage(this.id);
+
+        // Timer
 
         // set Status of sensorDetails to 'closed'
         for (const device of this.devices) {
@@ -135,7 +139,7 @@ export class LichtComponent implements OnInit {
                 device.subscriptionResult = this._mqttService.observe('stat/' + device.id + '/RESULT')
                     .subscribe((message: IMqttMessage) => {
 
-                        // console.log(device.id + ' Result:', message.payload.toString());
+                         console.log(device.id + ' Result:', message.payload.toString());
                         const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
                         // Global Timer Arm
@@ -143,8 +147,19 @@ export class LichtComponent implements OnInit {
                             device.timer = true;
                         }
 
+                        // Global Timer Arm
                         if (mqttResponse.Timers && mqttResponse.Timers === 'OFF') {
                             device.timer = false;
+                        }
+
+                        // Timer Power ON
+                        if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer1) {
+                            this.timerOn = mqttResponse.Timers1.Timer1;
+                        }
+
+                        // Timer Power OFF
+                        if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer2) {
+                            this.timerOff = mqttResponse.Timers1.Timer2;
                         }
 
                     });

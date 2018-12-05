@@ -102,3 +102,15 @@ li {
   margin-top: 0;
 }
 
+
+.timers{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px auto;
+  margin: 40px;
+  color: $color-label;
+  span{
+    margin-right: 10px;
+  }
+ }
