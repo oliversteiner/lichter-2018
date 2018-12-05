@@ -26,7 +26,7 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
     public testresult: string;
     public test_topic: string;
     private test_message: any;
-    private result: any;
+    public result: any;
 
 
     constructor(private _mqttService: MqttService) {

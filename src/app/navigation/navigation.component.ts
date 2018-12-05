@@ -15,7 +15,7 @@ export class NavigationComponent implements OnInit {
     public lichter = faLightbulb;
     public timer = faClock;
     public sensoren = faTemperatureFrigid;
-    private activePage: string;
+    public activePage: string;
     public subscription: Subscription;
 
     constructor(private config: ConfigService) {

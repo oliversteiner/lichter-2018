@@ -10,7 +10,7 @@ import {ConfigService} from '../_services/config.service';
 export class FooterComponent implements OnInit {
 
     appVersion = appVersion;
-    private debug: boolean;
+    public debug: boolean;
 
     constructor(private config: ConfigService) {
         this.debug = this.config.debug;

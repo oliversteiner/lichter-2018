@@ -52,8 +52,8 @@ export class LichterComponent implements OnInit {
 // MQTT
     public power: string;
     public sensor: string;
-    private timerOn: SonoffTimer;
-    private timerOff: SonoffTimer;
+    public timerOn: SonoffTimer;
+    public timerOff: SonoffTimer;
 
     constructor(private _mqttService: MqttService, private _config: ConfigService) {
 
