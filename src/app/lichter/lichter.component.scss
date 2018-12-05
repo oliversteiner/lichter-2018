@@ -66,6 +66,14 @@ li {
   justify-self: flex-end;
   cursor: pointer;
 
+  &:hover{
+    color: $color-accent;
+  }
+
+  &:active{
+    color: black;
+  }
+
 }
 
 

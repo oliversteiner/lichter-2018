@@ -79,9 +79,7 @@
                 <!-- sensor -->
                 <div *ngIf="device.sensor" class="item-sensor"
                      (click)="toggleDetails(device)">
-                    <div class="icon small">
-                        <img src="../../assets/images/icon/sensor/sensor.svg" alt="">
-                    </div>
+                    <fa-icon [icon]="sensorIcon"></fa-icon>
                 </div>
             </div>
 
