@@ -66,11 +66,11 @@ li {
   justify-self: flex-end;
   cursor: pointer;
 
-  &:hover{
+  &:hover {
     color: $color-accent;
   }
 
-  &:active{
+  &:active {
     color: black;
   }
 
@@ -111,14 +111,29 @@ li {
 }
 
 
-.timers{
+.timers {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px auto;
   margin: 40px;
   color: $color-label;
-  span{
+
+  span {
     margin-right: 10px;
   }
- }
+}
+
+
+.reload-timers {
+  color: $color-label;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-accent;
+  }
+
+  &:active {
+    color: $color-text;
+  }
+}

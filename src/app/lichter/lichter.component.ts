@@ -6,7 +6,7 @@ import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {MqttResponse} from '../_models/mqttResponse';
 import {ConfigService} from '../_services/config.service';
 import {SonoffTimer} from '../_models/sonoffTimer';
-import{faTemperatureFrigid} from '@fortawesome/pro-light-svg-icons/faTemperatureFrigid';
+import {faTemperatureFrigid, faClock} from '@fortawesome/pro-light-svg-icons';
 
 @Component({
     selector: 'app-lichter',
@@ -48,12 +48,12 @@ export class LichterComponent implements OnInit {
 
     // icons
     public sensorIcon = faTemperatureFrigid;
+    public timerIcon = faClock;
 
 // MQTT
     public power: string;
     public sensor: string;
-    public timerOn: SonoffTimer;
-    public timerOff: SonoffTimer;
+    public sonoffTimers: SonoffTimer[];
 
     constructor(private _mqttService: MqttService, private _config: ConfigService) {
 
@@ -64,8 +64,11 @@ export class LichterComponent implements OnInit {
         this._config.setActivePage(this.id);
 
         // Timer
-        this.timerOn = new SonoffTimer();
-        this.timerOff = new SonoffTimer();
+        this.sonoffTimers = [];
+        this.sonoffTimers[0] = new SonoffTimer();
+        this.sonoffTimers[1] = new SonoffTimer();
+        this.sonoffTimers[2] = new SonoffTimer();
+        this.sonoffTimers[3] = new SonoffTimer();
 
         // set Status of sensorDetails to 'closed'
         for (const device of this.devices) {
@@ -140,35 +143,36 @@ export class LichterComponent implements OnInit {
             }
 
             // Subscription Result
-            if (device.sensor) {
-                device.subscriptionResult = this._mqttService.observe('stat/' + device.id + '/RESULT')
-                    .subscribe((message: IMqttMessage) => {
+            device.subscriptionResult = this._mqttService.observe('stat/' + device.id + '/RESULT')
+                .subscribe((message: IMqttMessage) => {
 
-                     //   console.log(device.id + ' Result:', message.payload.toString());
-                        const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
+                    console.log(device.id + ' Result:', JSON.parse(message.payload.toString()));
 
-                        // Global Timer Arm
-                        if (mqttResponse.Timers && mqttResponse.Timers === 'ON') {
-                            device.timer = true;
+                    const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
+
+                    // Global Timer Arm
+                    if (mqttResponse.Timers && mqttResponse.Timers === 'ON') {
+                        device.timer = true;
+                    }
+
+                    // Global Timer Arm
+                    if (mqttResponse.Timers && mqttResponse.Timers === 'OFF') {
+                        device.timer = false;
+                    }
+
+                    // Load first 4 Timers
+                    // (Day On, Day Off, Night On, Night off)
+                    for (let i = 0; i <= 3; i++) {
+
+                        const timerNumber = i + 1;
+                        const timerName = 'Timer' + timerNumber;
+
+                        if (mqttResponse.Timers1 && mqttResponse.Timers1[timerName]) {
+                            this.sonoffTimers[i] = mqttResponse.Timers1[timerName];
                         }
+                    }
 
-                        // Global Timer Arm
-                        if (mqttResponse.Timers && mqttResponse.Timers === 'OFF') {
-                            device.timer = false;
-                        }
-
-                        // Timer Power ON
-                        if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer1) {
-                            this.timerOn = mqttResponse.Timers1.Timer1;
-                        }
-
-                        // Timer Power OFF
-                        if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer2) {
-                            this.timerOff = mqttResponse.Timers1.Timer2;
-                        }
-
-                    });
-            }
+                });
 
 
             this.getPowerStatus(device);
@@ -245,7 +249,7 @@ export class LichterComponent implements OnInit {
     }
 
 
-    public powerOn(device): void {
+    powerOn(device): void {
         const topic = 'cmnd/' + device.id + '/power';
         const message = 'ON';
 
@@ -254,14 +258,14 @@ export class LichterComponent implements OnInit {
 
     }
 
-    public powerOff(device): void {
+    powerOff(device): void {
         const topic = 'cmnd/' + device.id + '/power';
         const message = 'OFF';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 
     }
 
-    public getPowerStatus(device): void {
+    getPowerStatus(device): void {
         const topic = 'cmnd/' + device.id + '/power';
         const message = '';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
@@ -269,14 +273,27 @@ export class LichterComponent implements OnInit {
     }
 
 
-    public getTimerStatus(device): void {
-        const topic = 'cmnd/' + device.id + '/timers';
+    getTimerStatus(device?): void {
+
+        console.log('getTimerStatus', device);
+
+        if (device === undefined || device === false) {
+            device = this.getFirstOnlineDevice();
+
+            console.log('getFirstOnlineDevice', device);
+
+        }
+
+        const topic = 'cmnd/' + device.id + '/Timers';
+
+        console.log('topic', topic);
+
         const message = '';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
 
     }
 
-    public getSensorData(device): void {
+    getSensorData(device): void {
         const topic = 'cmnd/' + device.id + '/TelePeriod';
         let message = '10';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
@@ -303,4 +320,18 @@ export class LichterComponent implements OnInit {
 
         }
     }
+
+    getFirstOnlineDevice() {
+
+        const devices = this.devices.filter(device => {
+            if (device.online === true) {
+                return device;
+            }
+        });
+
+        return devices[0];
+
+    }
 }
+
+

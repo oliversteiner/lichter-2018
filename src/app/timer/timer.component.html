@@ -6,6 +6,11 @@
 <!-- Main -->
 <div class="main">
 
+
+    <div class="debug" [class.active]="debug">
+        <button (click)="reloadTimers()">Reload</button>
+    </div>
+
     <div class="main-icon">
         <div (click)="toggleTimer()">
 
@@ -27,8 +32,10 @@
         </div>
     </div>
 
-
-
+    <!-- Tag-->
+    <div class="trenner">
+        <h2>Tag</h2>
+    </div>
 
     <div>
         <div class="row row-timer">
@@ -43,7 +50,7 @@
                 <div class="row timer-up">
 
                     <!-- hh up-->
-                    <div class="step time-hh-up" (click)="stepUpHours('timerOn')">
+                    <div class="step time-hh-up" (click)="stepUpHours(0)">
                         <fa-icon [icon]="iconStepUp"></fa-icon>
                     </div>
 
@@ -51,16 +58,16 @@
                     <div class="time-divider"></div>
 
                     <!-- mm up-->
-                    <div class="step time-mm-up" (click)="stepUpMinutes('timerOn')">
+                    <div class="step time-mm-up" (click)="stepUpMinutes(0)">
                         <fa-icon [icon]="iconStepUp"></fa-icon>
                     </div>
                 </div>
 
                 <!-- HH:MM -->
                 <div class="row timer-display">
-                    <div class="step time-hh unselectable">{{timer.timerOn.h | number:'2.0'}}</div>
+                    <div class="step time-hh unselectable">{{timers[0].h | number:'2.0'}}</div>
                     <div class="time-divider unselectable">:</div>
-                    <div class="step time-mm unselectable">{{timer.timerOn.m | number:'2.0'}}</div>
+                    <div class="step time-mm unselectable">{{timers[0].m | number:'2.0'}}</div>
 
                 </div>
 
@@ -68,7 +75,7 @@
                 <div class="row timer-down">
 
                     <!-- hh down -->
-                    <div class="step time-hh-down" (click)="stepDownHours('timerOn')">
+                    <div class="step time-hh-down" (click)="stepDownHours(0)">
                         <fa-icon [icon]="iconStepDown"></fa-icon>
                     </div>
 
@@ -76,7 +83,7 @@
                     <div class="time-divider"></div>
 
                     <!-- mm down -->
-                    <div class="step time-mm-down" (click)="stepDownMinutes('timerOn')">
+                    <div class="step time-mm-down" (click)="stepDownMinutes(0)">
                         <fa-icon [icon]="iconStepDown"></fa-icon>
                     </div>
                 </div>
@@ -98,7 +105,7 @@
                 <div class="row timer-up">
 
                     <!-- hh up-->
-                    <div class="step time-hh-up" (click)="stepUpHours('timerOff')">
+                    <div class="step time-hh-up" (click)="stepUpHours(1)">
                         <fa-icon [icon]="iconStepUp"></fa-icon>
                     </div>
 
@@ -106,16 +113,16 @@
                     <div class="time-divider"></div>
 
                     <!-- mm up-->
-                    <div class="step time-mm-up" (click)="stepUpMinutes('timerOff')">
+                    <div class="step time-mm-up" (click)="stepUpMinutes(1)">
                         <fa-icon [icon]="iconStepUp"></fa-icon>
                     </div>
                 </div>
 
                 <!-- HH:MM -->
                 <div class="row timer-display">
-                    <div class="step time-hh unselectable" >{{timer.timerOff.h | number:'2.0'}}</div>
+                    <div class="step time-hh unselectable">{{timers[1].h | number:'2.0'}}</div>
                     <div class="time-divider unselectable">:</div>
-                    <div class="step time-mm unselectable">{{timer.timerOff.m | number:'2.0'}}</div>
+                    <div class="step time-mm unselectable">{{timers[1].m | number:'2.0'}}</div>
 
                 </div>
 
@@ -123,7 +130,7 @@
                 <div class="row timer-down">
 
                     <!-- hh down -->
-                    <div class="step time-hh-down" (click)="stepDownHours('timerOff')">
+                    <div class="step time-hh-down" (click)="stepDownHours(1)">
                         <fa-icon [icon]="iconStepDown"></fa-icon>
                     </div>
 
@@ -131,7 +138,124 @@
                     <div class="time-divider"></div>
 
                     <!-- mm down -->
-                    <div class="step time-mm-down" (click)="stepDownMinutes('timerOff')">
+                    <div class="step time-mm-down" (click)="stepDownMinutes(1)">
+                        <fa-icon [icon]="iconStepDown"></fa-icon>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <!-- Nacht -->
+    <div class="trenner">
+        <h2>Nacht</h2>
+    </div>
+    <div>
+        <div class="row row-timer">
+            <!-- Label On -->
+            <div class="timer-label"><span class="label unselectable">Einschalten</span></div>
+
+
+            <!--  Input Power ON -->
+            <div class="row-max time">
+
+                <!--  UP -->
+                <div class="row timer-up">
+
+                    <!-- hh up-->
+                    <div class="step time-hh-up" (click)="stepUpHours(2)">
+                        <fa-icon [icon]="iconStepUp"></fa-icon>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="time-divider"></div>
+
+                    <!-- mm up-->
+                    <div class="step time-mm-up" (click)="stepUpMinutes(2)">
+                        <fa-icon [icon]="iconStepUp"></fa-icon>
+                    </div>
+                </div>
+
+                <!-- HH:MM -->
+                <div class="row timer-display">
+                    <div class="step time-hh unselectable">{{timers[2].h | number:'2.0'}}</div>
+                    <div class="time-divider unselectable">:</div>
+                    <div class="step time-mm unselectable">{{timers[2].m | number:'2.0'}}</div>
+
+                </div>
+
+                <!--  Down -->
+                <div class="row timer-down">
+
+                    <!-- hh down -->
+                    <div class="step time-hh-down" (click)="stepDownHours(2)">
+                        <fa-icon [icon]="iconStepDown"></fa-icon>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="time-divider"></div>
+
+                    <!-- mm down -->
+                    <div class="step time-mm-down" (click)="stepDownMinutes(2)">
+                        <fa-icon [icon]="iconStepDown"></fa-icon>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="row row-timer">
+            <!-- Label Power Off  -->
+            <div class="timer-label"><span class="label unselectable">Ausschalten</span></div>
+
+
+            <!--  Input Power Off -->
+            <div class="row-max time">
+
+                <!--  UP -->
+                <div class="row timer-up">
+
+                    <!-- hh up-->
+                    <div class="step time-hh-up" (click)="stepUpHours(3)">
+                        <fa-icon [icon]="iconStepUp"></fa-icon>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="time-divider"></div>
+
+                    <!-- mm up-->
+                    <div class="step time-mm-up" (click)="stepUpMinutes(3)">
+                        <fa-icon [icon]="iconStepUp"></fa-icon>
+                    </div>
+                </div>
+
+                <!-- HH:MM -->
+                <div class="row timer-display">
+                    <div class="step time-hh unselectable">{{timers[3].h | number:'2.0'}}</div>
+                    <div class="time-divider unselectable">:</div>
+                    <div class="step time-mm unselectable">{{timers[3].m | number:'2.0'}}</div>
+
+                </div>
+
+                <!--  Down -->
+                <div class="row timer-down">
+
+                    <!-- hh down -->
+                    <div class="step time-hh-down" (click)="stepDownHours(3)">
+                        <fa-icon [icon]="iconStepDown"></fa-icon>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="time-divider"></div>
+
+                    <!-- mm down -->
+                    <div class="step time-mm-down" (click)="stepDownMinutes(3)">
                         <fa-icon [icon]="iconStepDown"></fa-icon>
                     </div>
                 </div>
@@ -159,108 +283,86 @@
 
     </div>
 
+    <div class="debug" [class.active]="debug">
+        <div class="debug-item">
 
+            <div>
+                <span class="label">Time 0</span>
+                <span>{{sonoffTimers[0].Time}}</span>
+            </div>
+
+            <div>
+                <span class="label">Time 1</span>
+                <span>{{sonoffTimers[1].Time}}</span>
+            </div>
+
+            <div>
+                <span class="label">Time 2</span>
+                <span>{{sonoffTimers[2].Time}}</span>
+            </div>
+
+            <div>
+                <span class="label">Time 3</span>
+                <span>{{sonoffTimers[3].Time}}</span>
+            </div>
+        </div>
+
+    </div>
 
 
     <!-- Debug -->
     <div class="debug" [class.active]="debug">
 
         <div class="row">
-            <div class="debug-item">
+            <div *ngFor="let sonoffTimer of sonoffTimers" class="debug-item">
 
                 <h5>Timer JSON ON</h5>
 
                 <table class="debug-table">
                     <tr>
                         <th>Arm</th>
-                        <td>{{sonoffTimers[0].Arm}}</td>
+                        <td>{{sonoffTimer.Arm}}</td>
                     </tr>
 
                     <tr>
                         <th>Mode</th>
-                        <td>{{sonoffTimers[0].Mode}}</td>
+                        <td>{{sonoffTimer.Mode}}</td>
                     </tr>
 
                     <tr>
                         <th>Time</th>
-                        <td>{{sonoffTimers[0].Time}}</td>
+                        <td>{{sonoffTimer.Time}}</td>
                     </tr>
 
                     <tr>
                         <th>Window</th>
-                        <td>{{sonoffTimers[0].Window}}</td>
+                        <td>{{sonoffTimer.Window}}</td>
                     </tr>
 
                     <tr>
                         <th>Days</th>
-                        <td>{{sonoffTimers[0].Days}}</td>
+                        <td>{{sonoffTimer.Days}}</td>
                     </tr>
 
                     <tr>
                         <th>Repeat</th>
-                        <td>{{sonoffTimers[0].Repeat}}</td>
+                        <td>{{sonoffTimer.Repeat}}</td>
                     </tr>
 
                     <tr>
                         <th>Output</th>
-                        <td>{{sonoffTimers[0].Output}}</td>
+                        <td>{{sonoffTimer.Output}}</td>
 
                     </tr>
                     <tr>
                         <th>Action</th>
-                        <td>{{sonoffTimers[0].Action}}</td>
+                        <td>{{sonoffTimer.Action}}</td>
                     </tr>
                 </table>
 
             </div>
 
-            <div class="debug-item">
 
-                <h5>Timer JSON Off</h5>
-
-                <table class="debug-table">
-                    <tr>
-                        <th>Arm</th>
-                        <td>{{sonoffTimers[1].Arm}}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Mode</th>
-                        <td>{{sonoffTimers[1].Mode}}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Time</th>
-                        <td>{{sonoffTimers[1].Time}}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Window</th>
-                        <td>{{sonoffTimers[1].Window}}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Days</th>
-                        <td>{{sonoffTimers[1].Days}}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Repeat</th>
-                        <td>{{sonoffTimers[1].Repeat}}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Output</th>
-                        <td>{{sonoffTimers[1].Output}}</td>
-
-                    </tr>
-                    <tr>
-                        <th>Action</th>
-                        <td>{{sonoffTimers[1].Action}}</td>
-                    </tr>
-                </table>
-
-            </div>
         </div>
     </div>
 

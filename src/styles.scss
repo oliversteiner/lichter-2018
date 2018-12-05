@@ -125,7 +125,7 @@ footer {
   // background-color: #fabac9;
 
   justify-content: space-around;
-
+  text-align: left;
 
   h5 {
     color: gray;
@@ -133,12 +133,28 @@ footer {
     margin: 0 0 10px 0;
     padding: 0;
   }
+
+  &.active {
+    display: flex;
+    width: 100%;
+  }
+
+  .label {
+    margin-right: 10px;
+
+  }
+
+  .row {
+    margin-bottom: 10px;
+  }
 }
 
 .debug-item {
+  display: block;
   border: 1px solid silver;
   padding: 10px;
   margin: 20px;
+  text-align: left;
 
 }
 
@@ -149,9 +165,6 @@ footer {
   }
 }
 
-.debug.active {
-  display: flex;
-}
 
 // SENSORS
 // ====================

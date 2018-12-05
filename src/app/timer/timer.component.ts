@@ -9,15 +9,10 @@ import {ConfigService} from '../_services/config.service';
 // Icons
 import {faChevronUp, faChevronDown, faCheck, faTimes} from '@fortawesome/pro-light-svg-icons';
 
+
 interface Timer {
-    timerOn: {
-        h: number,
-        m: number
-    };
-    timerOff: {
-        h: number,
-        m: number
-    };
+    h: number;
+    m: number;
 }
 
 @Component({
@@ -46,7 +41,7 @@ export class TimerComponent implements OnInit, OnDestroy {
     iconCancel = faTimes;
 
     // timer
-    timer: Timer;
+    timers: Timer[];
 
 
     // Devices from Data
@@ -62,22 +57,32 @@ export class TimerComponent implements OnInit, OnDestroy {
 
         // Devices
         this.sonoffTimers = [];
-
         this.sonoffTimers[0] = new SonoffTimer();
         this.sonoffTimers[1] = new SonoffTimer();
+        this.sonoffTimers[2] = new SonoffTimer();
+        this.sonoffTimers[3] = new SonoffTimer();
+
         this.globalTimerArm = 0;
 
         // Timer
-        this.timer = {
-            timerOn: {
+        this.timers = [
+            {
                 h: 0,
                 m: 0,
             },
-            timerOff: {
+            {
+                h: 0,
+                m: 0,
+            },
+            {
+                h: 0,
+                m: 0,
+            },
+            {
                 h: 0,
                 m: 0,
             }
-        };
+        ];
 
         for (const device of this.devices) {
 
@@ -88,9 +93,9 @@ export class TimerComponent implements OnInit, OnDestroy {
                 .subscribe((message: IMqttMessage) => {
 
                     this.result = message.payload.toString();
-                    // console.log('result', this.result);
+                    console.log('result', JSON.parse(this.result));
 
-                    const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
+                    const mqttResponse: MqttResponse = JSON.parse(this.result);
 
 
                     // Global Timer Arm
@@ -102,18 +107,29 @@ export class TimerComponent implements OnInit, OnDestroy {
                         this.globalTimerArm = 0;
                     }
 
-                    // Timer Power ON
-                    if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer1) {
-                        this.sonoffTimers[0] = mqttResponse.Timers1.Timer1;
+                    // Load first 4 Timers
+                    // (Day On, Day Off, Night On, Night off)
+                    for (let i = 0; i <= 3; i++) {
+
+                        const timerNumber = i + 1;
+                        const timerName = 'Timer' + timerNumber;
+
+                        if (mqttResponse.Timers1 && mqttResponse.Timers1[timerName]) {
+                            this.sonoffTimers[i] = mqttResponse.Timers1[timerName];
+                        }
                     }
 
-                    // Timer Power OFF
-                    if (mqttResponse.Timers1 && mqttResponse.Timers1.Timer2) {
-                        this.sonoffTimers[1] = mqttResponse.Timers1.Timer2;
+                    // Dont update if user currently edit the times
+                    if (this.edit === false) {
+
+                        //
+                        this.loadTimer();
+
+                        // Update GUI
+                        this.checkTimerStatus();
+
                     }
 
-                    // Update GUI
-                    this.checkTimerStatus();
 
                 });
         }
@@ -130,7 +146,6 @@ export class TimerComponent implements OnInit, OnDestroy {
     }
 
     checkTimerStatus() {
-        // console.log('this.timerStatus', this.timerStatus);
 
         this.timerStatus = 'Timer aus';
 
@@ -138,8 +153,6 @@ export class TimerComponent implements OnInit, OnDestroy {
         if (this.globalTimerArm) {
             this.timerStatus = 'Timer an';
         }
-
-        this.loadTimer();
 
 
     }
@@ -166,51 +179,70 @@ export class TimerComponent implements OnInit, OnDestroy {
         this.getTimerStatus();
     }
 
-    public getTimerStatus(): void {
+
+    getTimerStatus(): void {
         const topic = 'cmnd/sonoffs/Timers';
         const message = '';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
-
     }
-
 
 
     loadTimer() {
+        for (let i = 0; i <= 3; i++) {
 
-        // Timer On
-        const arrOn = this.sonoffTimers[0].Time.split(':');
-        this.timer.timerOn.h = Number(arrOn[0]);
-        this.timer.timerOn.m = Number(arrOn[1]);
-
-        // Timer Off
-        const arrOff = this.sonoffTimers[1].Time.split(':');
-        this.timer.timerOff.h = Number(arrOff[0]);
-        this.timer.timerOff.m = Number(arrOff[1]);
+            // Timer Day On
+            const arrOn = this.sonoffTimers[i].Time.split(':');
+            this.timers[i].h = Number(arrOn[0]);
+            this.timers[i].m = Number(arrOn[1]);
+        }
     }
+
 
     buildSonoffTimers() {
 
+        // Day On
         // Set Default Sonoff Timer Values
         this.sonoffTimers[0].Arm = 1;
         this.sonoffTimers[0].Action = 1;
         this.sonoffTimers[0].Days = '1111111';
         this.sonoffTimers[0].Repeat = 1;
         this.sonoffTimers[0].Output = 1;
-        this.publishSonoffTimers(1, this.sonoffTimers[0]);
 
-
+        // Day Off
         // Set Default Sonoff Timer Values
         this.sonoffTimers[1].Arm = 1;
         this.sonoffTimers[1].Action = 0;
         this.sonoffTimers[1].Days = '1111111';
         this.sonoffTimers[1].Repeat = 1;
         this.sonoffTimers[1].Output = 1;
-        this.publishSonoffTimers(2, this.sonoffTimers[1]);
+
+        // Night On
+        // Set Default Sonoff Timer Values
+        this.sonoffTimers[2].Arm = 1;
+        this.sonoffTimers[2].Action = 1;
+        this.sonoffTimers[2].Days = '1111111';
+        this.sonoffTimers[2].Repeat = 1;
+        this.sonoffTimers[2].Output = 1;
+
+        // Night Off
+        // Set Default Sonoff Timer Values
+        this.sonoffTimers[3].Arm = 1;
+        this.sonoffTimers[3].Action = 0;
+        this.sonoffTimers[3].Days = '1111111';
+        this.sonoffTimers[3].Repeat = 1;
+        this.sonoffTimers[3].Output = 1;
 
     }
 
+    publishSonoffTimers() {
+        for (let i = 0; i <= 3; i++) {
 
-    publishSonoffTimers(timerNumber: number, data: SonoffTimer): void {
+            this.publishSonoffTimer(i + 1, this.sonoffTimers[i]);
+        }
+    }
+
+
+    publishSonoffTimer(timerNumber: number, data: SonoffTimer): void {
         const topic = 'cmnd/sonoffs/Timer' + timerNumber;
         const message = JSON.stringify(data);
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
@@ -223,11 +255,11 @@ export class TimerComponent implements OnInit, OnDestroy {
 
     }
 
-    stepUpHours(timer: string) {
+    stepUpHours(timer: number) {
 
         this.edit = true;
 
-        let number = this.timer[timer].h;
+        let number = this.timers[timer].h;
 
         // Step up Hours 0...23
         if (number >= 23) {
@@ -236,14 +268,14 @@ export class TimerComponent implements OnInit, OnDestroy {
             number++;
         }
 
-        this.timer[timer].h = number;
+        this.timers[timer].h = number;
     }
 
-    stepUpMinutes(timer: string) {
+    stepUpMinutes(timer: number) {
 
         this.edit = true;
 
-        let number = this.timer[timer].m;
+        let number = this.timers[timer].m;
 
         // Step up Minutes 0...59
         if (number >= 59) {
@@ -252,14 +284,14 @@ export class TimerComponent implements OnInit, OnDestroy {
             number++;
         }
 
-        this.timer[timer].m = number;
+        this.timers[timer].m = number;
     }
 
-    stepDownHours(timer: string) {
+    stepDownHours(timer: number) {
 
         this.edit = true;
 
-        let number = this.timer[timer].h;
+        let number = this.timers[timer].h;
 
         // Step down Hours 0...23
         if (number <= 0) {
@@ -268,14 +300,14 @@ export class TimerComponent implements OnInit, OnDestroy {
             number--;
         }
 
-        this.timer[timer].h = number;
+        this.timers[timer].h = number;
     }
 
-    stepDownMinutes(timer: string) {
+    stepDownMinutes(timer: number) {
 
         this.edit = true;
 
-        let number = this.timer[timer].m;
+        let number = this.timers[timer].m;
 
         // Step down Minutes 0...59
         if (number <= 0) {
@@ -284,7 +316,7 @@ export class TimerComponent implements OnInit, OnDestroy {
             number--;
         }
 
-        this.timer[timer].m = number;
+        this.timers[timer].m = number;
     }
 
     cancel() {
@@ -299,12 +331,23 @@ export class TimerComponent implements OnInit, OnDestroy {
 
         this.edit = false;
 
-        // Timer On
-        this.sonoffTimers[0].Time = this.timer.timerOn.h + ':' + this.timer.timerOn.m;
+        // Day   - Timer On   : 0
+        // Day   - Timer Off  : 1
+        // Night - Timer On   : 2
+        // Night - Timer Off  : 3
 
-        // Timer Off
-        this.sonoffTimers[1].Time = this.timer.timerOff.h + ':' + this.timer.timerOff.m;
+        for (let i = 0; i <= 3; i++) {
+            this.sonoffTimers[i].Time = this.timers[i].h + ':' + this.timers[i].m;
+        }
+
 
         this.buildSonoffTimers();
+        this.publishSonoffTimers();
     }
+
+    reloadTimers() {
+        this.getTimerStatus();
+    }
+
+
 }

@@ -115,12 +115,15 @@
 <div class="timers">
 
     <!-- Clock Icon -->
-    <span class="icon small">
-        <img src="../../assets/images/icon/timer/clock-off.svg" alt="">
+    <span class="reload-timers icon small" (click)="getTimerStatus()">
+<fa-icon [icon]="timerIcon"></fa-icon>
     </span>
 
     <!-- Timer Text -->
-    <span>von {{timerOn.Time}} bis {{timerOff.Time}}</span>
+    <span>
+        <div>von {{sonoffTimers[0].Time}} bis {{sonoffTimers[1].Time}}</div>
+        <div>von {{sonoffTimers[2].Time}} bis {{sonoffTimers[3].Time}}</div>
+    </span>
 
 
 </div>

@@ -103,3 +103,23 @@
     display: flex;
   }
 }
+
+
+h2 {
+  position: absolute;
+  background-color: $color-background;
+  display: inline-block;
+  padding: 0 20px;
+  top: -14px;
+  left: 100px;
+
+}
+
+div.trenner {
+  position: relative;
+  margin: 40px;
+  text-align: center;
+  width: 100%;
+  border-top: solid 1px $color-border;
+
+}
