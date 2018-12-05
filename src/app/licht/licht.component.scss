@@ -26,12 +26,22 @@
 }
 
 
+ul {
+  margin: 0;
+  padding: 0;
+  width: 90%;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
 .item-timer,
 .item-power,
 .item-name,
 .item-sensor {
   margin: 0 5px;
-  display: inline-block;
   text-align: center;
 }
 
@@ -48,23 +58,20 @@
 }
 
 .item-name {
-  min-width: 200px;
+  width: 100%;
   text-align: left;
-  border: none;
 }
 
 .item-sensor {
+  justify-self: flex-end;
   cursor: pointer;
 
-}
-
-.container-sensor {
-  z-index: -10;
 }
 
 
 .item-container {
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   margin: 0;
   padding: 0;
@@ -88,7 +95,7 @@
 // ====================
 
 .sensor-value {
-font-size: 25px;
+  font-size: 25px;
 }
 
 .sensor-unit {

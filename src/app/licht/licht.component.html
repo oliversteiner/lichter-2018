@@ -89,6 +89,8 @@
             <!-- sensors -->
             <div class="container-sensor" *ngIf="device.sensor"
                  [@openClose]="device.sensorDetails ? 'open' : 'closed'"
+                 (@openClose.done)="hideContent($event)"
+                 (@openClose.start)="showContent($event)"
             >
 
                 <div class="row">

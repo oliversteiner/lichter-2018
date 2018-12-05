@@ -15,10 +15,12 @@ import {ConfigService} from '../_services/config.service';
         trigger('openClose', [
             // ...
             state('open', style({
+                display: 'block',
                 height: '80px',
                 opacity: 1,
             })),
             state('closed', style({
+                display: 'block',
                 height: '0px',
                 opacity: 0,
             })),
@@ -123,10 +125,7 @@ export class LichtComponent implements OnInit {
                         }
 
 
-
-
                     });
-
 
 
             }
@@ -269,4 +268,18 @@ export class LichtComponent implements OnInit {
         );
     }
 
+    hideContent(event) {
+
+        if(event.toState === 'closed'){
+            event.element.children[0].style.display = 'none';
+        }
+    }
+
+    showContent(event) {
+
+        if(event.toState === 'open'){
+            event.element.children[0].style.display = 'flex';
+
+        }
+    }
 }

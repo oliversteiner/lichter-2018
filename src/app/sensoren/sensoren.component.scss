@@ -12,7 +12,7 @@
 
 .sensor-container {
   border: 1px solid $color-border;
-  margin: 20px 20px 60px 20px;
+  margin: 0 0 40px ;
   padding: 20px;
 
   h2 {
@@ -29,7 +29,7 @@
 ul {
   margin: 0;
   padding: 0;
-  width: 80%;
+  width: 90%;
 }
 
 li {
@@ -38,13 +38,7 @@ li {
   list-style: none;
 }
 
-.sensor-value {
 
-}
-
-.sensor-unit {
-
-}
 
 .border-label {
   //  display: inline-block;
