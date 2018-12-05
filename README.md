@@ -1,6 +1,6 @@
 # Lichter 2018
 
-Simple webapp to controll my chrismaslights.
+Simple webapp to controll chrismaslights.
 
 Send MQTT Topics via Websockets to EMQX Broker to Sonoff Devices.
 

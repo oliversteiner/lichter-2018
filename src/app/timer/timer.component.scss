@@ -1,62 +1,105 @@
 @import "./../../colors";
 
 
-
 .row {
   display: flex;
-  padding: 10px;
+  align-items: center;
+  justify-content: center;
+
+
 }
 
-input,
+.row-max {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+}
+
+.row-timer {
+  margin-bottom: 20px;
+}
+
 .time {
   font-size: 25px;
   letter-spacing: 0.1em;
 }
 
 
-.container-edit {
-  display: none;
-
-  &.show {
-    display: inline;
-  }
-}
-
-.container-display {
-  display: block;
-
-  &.hide {
-    display: none;
-  }
-}
-
-
 .timer-label {
-  width: 150px;
+  width: 130px;
 }
 
-.container-save {
-  display: none;
 
-  &.show {
-    display: inline;
-  }
-}
-
-.container-save {
-  display: none;
-  width: 100%;
+.step {
+  width: 50px;
   text-align: center;
-
-  &.show {
-    display: block;
-  }
 }
 
 
-input {
-  background-color: transparent;
-  border: 0;
-  color: $color-accent;
-  font-family: "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif;
+.time-divider {
+  width: 10px;
+  text-align: center;
+}
+
+.time-hh-up,
+.time-mm-up,
+.time-hh-down,
+.time-mm-down {
+  cursor: pointer;
+  color: rgb(102, 102, 102);
+
+  &:hover {
+    color: $color-text;
+  }
+
+  &:active {
+    color: black;
+  }
+}
+
+.cancel,
+.save {
+  cursor: pointer;
+  font-size: 30px;
+  padding: 10px;
+  margin: 10px;
+
+}
+
+.cancel {
+  color: $color-border;
+
+  &:hover {
+    color: $color-error;
+  }
+
+  &:active {
+    color: $color-text;
+  }
+}
+
+.save {
+  color: $color-success;
+
+  &:hover {
+    color: #00e046;
+  }
+
+  &:active {
+    color: $color-text;
+  }
+}
+
+.unselectable {
+  user-select: none;
+}
+
+
+.save-cancel-container {
+  display: none;
+
+  &.active {
+    display: flex;
+  }
 }
