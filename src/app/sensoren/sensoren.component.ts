@@ -43,7 +43,7 @@ export class SensorenComponent implements OnInit {
                     .subscribe((message: IMqttMessage) => {
 
                         // Debug
-                        console.log(device.id + ' Sensor:', message.payload.toString());
+                      //  console.log(device.id + ' Sensor:', message.payload.toString());
 
                         // Device Online?
                         device.online = true;

@@ -12,7 +12,7 @@ import {Subscription} from 'rxjs';
 export class NavigationComponent implements OnInit {
 
     // Icons
-    public licht = faLightbulb;
+    public lichter = faLightbulb;
     public timer = faClock;
     public sensoren = faTemperatureFrigid;
     private activePage: string;

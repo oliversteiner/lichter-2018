@@ -11,7 +11,7 @@ import {
     MqttModule,
     IMqttServiceOptions
 } from 'ngx-mqtt';
-import {LichtComponent} from './licht/licht.component';
+import {LichterComponent} from './lichter/lichter.component';
 import {TimerComponent} from './timer/timer.component';
 import {SensorenComponent} from './sensoren/sensoren.component';
 import {FooterComponent} from './footer/footer.component';
@@ -36,7 +36,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
         AppComponent,
         SandboxComponent,
         MqttSandboxComponent,
-        LichtComponent,
+        LichterComponent,
         TimerComponent,
         SensorenComponent,
         FooterComponent,

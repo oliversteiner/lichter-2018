@@ -8,9 +8,9 @@ import {ConfigService} from '../_services/config.service';
 import {SonoffTimer} from '../_models/sonoffTimer';
 
 @Component({
-    selector: 'app-licht',
-    templateUrl: './licht.component.html',
-    styleUrls: ['./licht.component.scss'],
+    selector: 'app-lichter',
+    templateUrl: './lichter.component.html',
+    styleUrls: ['./lichter.component.scss'],
     animations: [
         trigger('openClose', [
             // ...
@@ -34,11 +34,11 @@ import {SonoffTimer} from '../_models/sonoffTimer';
     ],
 })
 
-export class LichtComponent implements OnInit {
+export class LichterComponent implements OnInit {
 
     // General
     public title = 'Lichter';
-    public id = 'licht';
+    public id = 'lichter';
     public debug = true;
     public powerStatusAllDevices = false;
 
@@ -61,6 +61,8 @@ export class LichtComponent implements OnInit {
         this._config.setActivePage(this.id);
 
         // Timer
+        this.timerOn = new SonoffTimer();
+        this.timerOff = new SonoffTimer();
 
         // set Status of sensorDetails to 'closed'
         for (const device of this.devices) {
@@ -139,7 +141,7 @@ export class LichtComponent implements OnInit {
                 device.subscriptionResult = this._mqttService.observe('stat/' + device.id + '/RESULT')
                     .subscribe((message: IMqttMessage) => {
 
-                         console.log(device.id + ' Result:', message.payload.toString());
+                     //   console.log(device.id + ' Result:', message.payload.toString());
                         const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
                         // Global Timer Arm
@@ -168,6 +170,7 @@ export class LichtComponent implements OnInit {
 
             this.getPowerStatus(device);
             this.getTimerStatus(device);
+            this.getSensorData(device);
 
         }
     }
@@ -285,14 +288,14 @@ export class LichtComponent implements OnInit {
 
     hideContent(event) {
 
-        if(event.toState === 'closed'){
+        if (event.toState === 'closed') {
             event.element.children[0].style.display = 'none';
         }
     }
 
     showContent(event) {
 
-        if(event.toState === 'open'){
+        if (event.toState === 'open') {
             event.element.children[0].style.display = 'flex';
 
         }
