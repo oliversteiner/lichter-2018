@@ -7,7 +7,7 @@ import {Subject} from 'rxjs';
 export class ConfigService {
 
     private activePage = '';
-    public debug = true;
+    public debug = false;
     public _activePage: Subject<any> = new Subject<any>();
 
 

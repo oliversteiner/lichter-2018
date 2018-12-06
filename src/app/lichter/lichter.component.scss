@@ -111,23 +111,28 @@ li {
 }
 
 
-.timers {
+// Timers
+// ====================
+
+.timer-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px auto;
-  margin: 40px;
-  color: $color-label;
+  margin: 50px;
 
-  span {
-    margin-right: 10px;
+  div {
   }
 }
 
 
 .reload-timers {
+  display: block;
+  text-align: center;
+  vertical-align: center;
+  font-size: 30px;
   color: $color-label;
   cursor: pointer;
+  margin-right: 20px;
 
   &:hover {
     color: $color-accent;
@@ -135,5 +140,20 @@ li {
 
   &:active {
     color: $color-text;
+  }
+}
+
+.timers {
+  display: block;
+
+}
+
+.row-timer {
+  color: $color-label;
+  margin: 5px;
+
+  span {
+    color: $color-text;
+    margin: 0 5px;
   }
 }

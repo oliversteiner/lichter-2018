@@ -112,18 +112,18 @@
 </div>
 
 
-<div class="timers">
+<div class="timer-container">
 
     <!-- Clock Icon -->
-    <span class="reload-timers icon small" (click)="getTimerStatus()">
+    <div class="reload-timers icon small" (click)="getTimerStatus()">
 <fa-icon [icon]="timerIcon"></fa-icon>
-    </span>
+    </div>
 
     <!-- Timer Text -->
-    <span>
-        <div>von {{sonoffTimers[0].Time}} bis {{sonoffTimers[1].Time}}</div>
-        <div>von {{sonoffTimers[2].Time}} bis {{sonoffTimers[3].Time}}</div>
-    </span>
+    <div class="timers">
+        <div class="row-timer">von <span>{{sonoffTimers[0].Time}}</span> bis <span>{{sonoffTimers[1].Time}}</span></div>
+        <div class="row-timer">von <span>{{sonoffTimers[2].Time}}</span> bis <span>{{sonoffTimers[3].Time}}</span></div>
+    </div>
 
 
 </div>
