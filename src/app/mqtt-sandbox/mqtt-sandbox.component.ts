@@ -32,10 +32,7 @@ export class MqttSandboxComponent implements OnInit, OnDestroy {
     constructor(private _mqttService: MqttService) {
 
         this.test_topic = '';
-        //  this.test_topic = 'sonoff/Timers';
-        //  this.test_topic = 'sonoff/SENSOR';
-        // this.test_topic = 'cmnd/sonoff/Timer1';
-        // this.test_message = '{"Arm":1,"Time":"01:57","Window":0,"Days":"SM00TFS","Repeat":1,"Output":1,"Action":1}';
+
 
         // World
         this.subscription_world = this._mqttService.observe('/World').subscribe((message: IMqttMessage) => {
