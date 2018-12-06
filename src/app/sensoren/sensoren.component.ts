@@ -100,7 +100,7 @@ export class SensorenComponent implements OnInit {
         for (const device of this.devices) {
 
             if (device.sensor) {
-                console.log('devices', device);
+               // console.log('devices', device);
 
                 this.getSensorData(device);
             }

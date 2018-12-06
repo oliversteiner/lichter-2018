@@ -98,7 +98,7 @@ export class TimerComponent implements OnInit, OnDestroy {
                 .subscribe((message: IMqttMessage) => {
 
                     this.result = message.payload.toString();
-                    console.log('result', JSON.parse(this.result));
+                   // console.log('result', JSON.parse(this.result));
 
                     const mqttResponse: MqttResponse = JSON.parse(this.result);
 

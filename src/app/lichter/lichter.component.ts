@@ -146,7 +146,7 @@ export class LichterComponent implements OnInit {
             device.subscriptionResult = this._mqttService.observe('stat/' + device.id + '/RESULT')
                 .subscribe((message: IMqttMessage) => {
 
-                    console.log(device.id + ' Result:', JSON.parse(message.payload.toString()));
+                  //  console.log(device.id + ' Result:', JSON.parse(message.payload.toString()));
 
                     const mqttResponse: MqttResponse = JSON.parse(message.payload.toString());
 
@@ -275,18 +275,13 @@ export class LichterComponent implements OnInit {
 
     getTimerStatus(device?): void {
 
-        console.log('getTimerStatus', device);
+      //  console.log('getTimerStatus', device);
 
         if (device === undefined || device === false) {
             device = this.getFirstOnlineDevice();
-
-            console.log('getFirstOnlineDevice', device);
-
         }
 
         const topic = 'cmnd/' + device.id + '/Timers';
-
-        console.log('topic', topic);
 
         const message = '';
         this._mqttService.unsafePublish(topic, message, {qos: 1, retain: true});
