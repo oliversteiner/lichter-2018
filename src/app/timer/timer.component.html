@@ -6,6 +6,9 @@
 <!-- Main -->
 <div class="main">
 
+    <div *ngIf="loading">
+        <fa-icon [icon]="iconSpinner" [spin]="true"></fa-icon>
+    </div>
 
     <div class="debug" [class.active]="debug">
         <button (click)="reloadTimers()">Reload</button>

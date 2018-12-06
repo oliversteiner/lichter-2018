@@ -7,7 +7,7 @@ import {Device} from '../_models/devices';
 import {DEVICES} from '../../assets/data/devices';
 import {ConfigService} from '../_services/config.service';
 // Icons
-import {faChevronUp, faChevronDown, faCheck, faTimes} from '@fortawesome/pro-light-svg-icons';
+import {faChevronUp, faChevronDown, faCheck, faTimes, faSpinner} from '@fortawesome/pro-light-svg-icons';
 
 
 interface Timer {
@@ -39,18 +39,23 @@ export class TimerComponent implements OnInit, OnDestroy {
     iconStepDown = faChevronDown;
     iconSave = faCheck;
     iconCancel = faTimes;
+    iconSpinner = faSpinner;
 
     // timer
     timers: Timer[];
 
 
     // Devices from Data
-    private devices: Device[] = DEVICES;
+     devices: Device[] = DEVICES;
+     loading: boolean;
 
     constructor(private _mqttService: MqttService, private _config: ConfigService) {
 
         // Debug
         this.debug = this._config.debug;
+
+        // Loading
+        this.loading = true;
 
         // Navigation
         this._config.setActivePage(this.id);
@@ -116,7 +121,9 @@ export class TimerComponent implements OnInit, OnDestroy {
 
                         if (mqttResponse.Timers1 && mqttResponse.Timers1[timerName]) {
                             this.sonoffTimers[i] = mqttResponse.Timers1[timerName];
+                            this.loading = false;
                         }
+
                     }
 
                     // Dont update if user currently edit the times
