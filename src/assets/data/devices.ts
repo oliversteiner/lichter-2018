@@ -39,6 +39,7 @@ export const DEVICES: Device[] =
 
         {
             name: 'Stern und Laube',
+            place: 'Aussentemperatur Eingang',
             timer: true,
             power: false,
             online: false,
@@ -71,7 +72,7 @@ export const DEVICES: Device[] =
             sensor: false,
             group: 'sonoffs',
             id: 'sonoff-magnolien',
-            ip: '10.0.2.17',
+            ip: '10.0.2.12',
 
         },
     ];
