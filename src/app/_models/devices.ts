@@ -18,6 +18,7 @@ export interface Device {
     temperature?: number;
     humidity?: number;
     group?: string;
+    ip?: string;
 
     // helper
     sensorDetails?: boolean;
