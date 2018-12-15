@@ -24,22 +24,22 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
 
 
     // Dev
-    // clientId: 'lichter-2018',
-    // connectTimeout: 5000,
-    // hostname: '10.0.1.11',
-    // port: 8083,
-    // path: '/mqtt',
-    // username: 'schlossnet',
-    // password: 'schloss#28975-IUZ',
-
-    // Prod
      clientId: 'lichter-2018',
      connectTimeout: 5000,
-     hostname: 'iot-server.local',
+     hostname: '10.0.1.11',
      port: 8083,
      path: '/mqtt',
      username: 'schlossnet',
-     password: 'schloss#28975-IUZ',
+     password: 'schloss#28//975-IUZ',
+
+    // Prod
+   //  clientId: 'lichter-2018',
+   //  connectTimeout: 5000,
+   //  hostname: 'iot-server.local',
+   //  port: 8083,
+   //  path: '/mqtt',
+   //  username: 'schlossnet',
+   //  password: 'schloss#28975-IUZ',
 
 
 };
