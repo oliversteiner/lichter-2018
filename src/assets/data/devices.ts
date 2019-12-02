@@ -71,7 +71,7 @@ export const DEVICES: Device[] =
             online: false,
             sensor: false,
             group: 'sonoffs',
-            id: 'sonoff-magnolien',
+            id: 'sonoff-magnolien-2',
             ip: '10.0.2.12',
 
         },
