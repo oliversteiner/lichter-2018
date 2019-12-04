@@ -39,5 +39,5 @@ testem.log
 Thumbs.db
 
 # sensitive Content
-!/src/environments/environment.staging.ts
-!/src/environments/environment.prod.ts
+/src/environments/environment.staging.ts
+/src/environments/environment.prod.ts
