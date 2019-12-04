@@ -19,29 +19,19 @@ import {HeaderComponent} from './header/header.component';
 import {NavigationComponent} from './navigation/navigation.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {environment} from '../environments/environment';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
 
 
-    // Dev
-     clientId: 'lichter-2018',
-     connectTimeout: 5000,
-     hostname: '10.0.1.11',
-     port: 8083,
-     path: '/mqtt',
-     username: 'schlossnet',
-     password: 'schloss#28//975-IUZ',
-
-    // Prod
-   //  clientId: 'lichter-2018',
-   //  connectTimeout: 5000,
-   //  hostname: 'iot-server.local',
-   //  port: 8083,
-   //  path: '/mqtt',
-   //  username: 'schlossnet',
-   //  password: 'schloss#28975-IUZ',
-
-
+    // Import Credentials from Environment
+     clientId: environment.clientId,
+     connectTimeout: environment.connectTimeout,
+     hostname: environment.hostname,
+     port: environment.port,
+     path: environment.path,
+     username: environment.username,
+     password: environment.password,
 };
 
 //
@@ -72,4 +62,8 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor() {
+    console.log('environment', environment.name); // Logs false for default environment
+  //  console.log('MQTT_SERVICE_OPTIONS', MQTT_SERVICE_OPTIONS);
+  }
 }

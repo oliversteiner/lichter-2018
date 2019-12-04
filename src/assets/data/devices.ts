@@ -8,7 +8,7 @@ export const DEVICES: Device[] =
 
         {
             name: 'Pergola',
-            place: 'Pergola Vorne',
+            place: 'Pergola Mitte',
             timer: false,
             power: false,
             online: false,
@@ -16,14 +16,14 @@ export const DEVICES: Device[] =
             temperature: 0,
             humidity: 0,
             group: 'sonoffs',
-            id: 'sonoff-pergola-vorne',
+            id: 'sonoff-pergola',
             ip: '10.0.2.16',
 
         },
 
 
         {
-            name: 'Stern Strasse / Pergola',
+            name: 'Stern  Pergola',
             place: 'Pergola hinten',
             timer: false,
             power: false,
@@ -32,7 +32,7 @@ export const DEVICES: Device[] =
             temperature: 0,
             humidity: 0,
             group: 'sonoffs',
-            id: 'sonoff-pergola-hinten',
+            id: 'sonoff-stern-pergola',
             ip: '10.0.2.15',
 
         },
@@ -52,26 +52,26 @@ export const DEVICES: Device[] =
         },
 
         {
-            name: 'Terrasse / Eckfenster',
+            name: 'Erker - Terrasse',
             timer: false,
             power: false,
             online: false,
             sensor: false,
             group: 'sonoffs',
-            id: 'sonoff-terrasse',
+            id: 'sonoff-erker-terrasse',
             ip: '10.0.2.13',
 
         },
 
         {
-            name: 'Baum Sitzplatz',
-            place: 'Ecke Magnolienbaum',
+            name: 'Sitzplatz',
+            place: 'Christbaum beim Sitzplatz',
             timer: false,
             power: false,
             online: false,
             sensor: false,
             group: 'sonoffs',
-            id: 'sonoff-magnolien-2',
+            id: 'sonoff-sitzplatz',
             ip: '10.0.2.12',
 
         },
